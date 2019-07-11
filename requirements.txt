@@ -1,4 +1,3 @@
 sphinx
 sphinxcontrib-httpdomain
-cloud_sptheme
-guzzle_sphinx_theme
+sphinx_rtd_theme
