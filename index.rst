@@ -10,7 +10,6 @@
 
    walkthrough/index
    extra/index
-   glossary
 
 Дополнительно
 ==================

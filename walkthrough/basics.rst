@@ -12,9 +12,9 @@
 
 .. _walkthrough/basics/begin:
 
-Ticketscloud API построено с учетом :term:`REST`. 
-С авторизацией через :term:`HTTP Basic Auth`.
-В теле запросов и ответов используется :term:`JSON`. 
+Ticketscloud API построено с учетом `REST`.
+С авторизацией через `HTTP Basic Auth`.
+В теле запросов и ответов используется `JSON`.
 Для демонстрации запросов к API используется утилита `HTTPie`_
 
 .. _HTTPie: https://httpie.org/
@@ -43,11 +43,11 @@ Ticketscloud API построено с учетом :term:`REST`.
 
 Пример запроса:
 
-    .. sourcecode:: http
+    .. sourcecode:: js
 
        http GET https://ticketscloud.com/v2/resources/orders?number=52899 Authorization:'key 9bd8359943b545500278875r49c5b96d'
 
 .. warning::
-    Все запросы к API осуществляются только через :term:`HTTPS`.
-    Запросы через :term:`HTTP` будут отклонены со статусом :http:statuscode:`301`.
+    Все запросы к API осуществляются только через `HTTPS`.
+    Запросы через `HTTP` будут отклонены со статусом :http:statuscode:`301`.
 
