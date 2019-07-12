@@ -1,0 +1,33 @@
+body {
+    background: #394C6D;
+}
+
+div.body h2 {
+    background-color: #FFDA00;
+    color: #454545;
+    text-shadow: none;
+}
+
+div.body h2.highlighted {
+    background-color: #FFF866;
+}
+
+div.body p.rubric, .section.emphasize-children > .section > h3, .desc-section-1 > .section-header, #table-of-contents > h1, h1#search-documentation {
+    background-color: #FFDA00;
+    color: #454545;
+    text-shadow: none;
+}
+
+.highlighted {
+    background-color: #FFF866;
+}
+
+div.related {
+    background: #FFDA00;
+    color: #454545;
+    text-shadow: none;
+}
+
+div.related a {
+    color: #454545;
+}
