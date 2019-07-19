@@ -19,9 +19,9 @@
 
 **Запрос**
 
-    .. http:post:: /v2/resources/orders/
+    .. http:post:: /v2/resources/orders
 
-        :query event: Обязателен
+        :jsonparam event: Обязателен
 
 
 **Ответ**
@@ -39,10 +39,6 @@
                 "created_at": isodatetime
                 "done_at": isodatetime
                 "expired_after": isodatetime
-                "custom_fields": {
-                    "order": [...],
-                    "tickets": [...]
-                }
                 "event": objectid
                 "number": int
                 "org": objectid
@@ -71,11 +67,6 @@
                         "lang": 'en' | 'ru'
                     }
                 }
-                "sessions": {
-                    "ga": str
-                    "utm": objectid
-                    "roistat": str
-                },
                 "tickets": [
                     {
                         "id": objectid
@@ -192,18 +183,12 @@
         {
             "data": {
                 "created_at": "2019-07-02 13:54:15",
-                "custom_fields": {
-                    "order": [],
-                    "tickets": []
-                },
                 "event": "5c87d5871a2778000c7e7771",
                 "expired_after": "2019-07-02 14:09:15",
                 "id": "5d1b62074ed1c53b328ad4f0",
                 "number": 52906,
                 "org": "5b04229196c055000d87c2b5",
                 "origin": "api",
-                "payments": [],
-                "promocodes": [],
                 "settings": {
                     "invitation": false,
                     "send_tickets": false,
@@ -293,7 +278,7 @@
                 "partners": {
                     "5b04229196c055000d87c2b5": {
                         "id": "5b04229196c055000d87c2b5",
-                        "name": "\"Έλληνας διοργανωτής\""
+                        "name": "My best partner"
                     }
                 },
                 "promocodes": {},

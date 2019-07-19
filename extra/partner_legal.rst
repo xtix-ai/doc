@@ -52,7 +52,6 @@
     .. sourcecode:: http
 
         GET /v1/resources/partners/5b0286ce517565000d9cb1ca?fields-schema=legal%7Btype,bank,detail,who%7D HTTP/1.1
-        Accept-Encoding: gzip, deflate
         Authorization: key 9bd8359943b545500278875r49c5b96d
 
 

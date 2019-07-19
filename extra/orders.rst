@@ -75,17 +75,12 @@
         {
             "data": {
                 "created_at": "2018-09-27 15:25:02",
-                "custom_fields": {
-                    ...
-                },
                 "event": "5b23b53b9c9b19000c6c4180",
                 "expired_after": "2018-11-16 00:00:00",
                 "id": "5bacf64ea0eb2f000c45160a",
                 "number": 41564,
                 "org": "5b0286ce517565000d9cb1ca",
                 "origin": "api",
-                "payments": [],
-                "promocodes": [],
                 "settings": {
                     "customer": {
                         "email": "hello@world.ru",
@@ -169,18 +164,12 @@
         {
             "data": {
                 "created_at": "2018-09-27 15:25:02",
-                "custom_fields": {
-                    "order": [],
-                    "tickets": []
-                },
                 "event": "5b23b53b9c9b19000c6c4180",
                 "expired_after": "2018-11-16 00:00:00",
                 "id": "5bacf64ea0eb2f000c45160a",
                 "number": 41564,
                 "org": "5b0286ce517565000d9cb1ca",
                 "origin": "api",
-                "payments": [],
-                "promocodes": [],
                 "settings": {
                     ...
                 },
@@ -256,18 +245,12 @@
         {
             "data": {
                 "created_at": "2018-09-27 15:25:02",
-                "custom_fields": {
-                    "order": [],
-                    "tickets": []
-                },
                 "event": "5b23b53b9c9b19000c6c4180",
                 "expired_after": "2018-11-16 00:00:00",
                 "id": "5bacf64ea0eb2f000c45160a",
                 "number": 41564,
                 "org": "5b0286ce517565000d9cb1ca",
                 "origin": "api",
-                "payments": [],
-                "promocodes": [],
                 "settings": {
                     "send_tickets": true,
                     ...
@@ -342,18 +325,12 @@
         {
             "data": {
                 "created_at": "2018-09-27 15:25:02",
-                "custom_fields": {
-                    "order": [],
-                    "tickets": []
-                },
                 "event": "5b23b53b9c9b19000c6c4180",
                 "expired_after": "2018-11-16 00:00:00",
                 "id": "5bacf64ea0eb2f000c45160a",
                 "number": 41564,
                 "org": "5b0286ce517565000d9cb1ca",
                 "origin": "api",
-                "payments": [],
-                "promocodes": ["TOP50"],
                 "settings": {
                     ...
                 },

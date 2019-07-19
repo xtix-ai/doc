@@ -35,3 +35,18 @@ Media
     :md5hash: хеш md5 от содержимого
     :url: полный урл до файла
 
+.. _extra/types/objectid:
+
+ObjectId
+========
+
+Уникальный идентификатор в рамках сущности -- строка из 24 символов ([[a-zA-Z0-9])
+
+.. _extra/types/isodatetime:
+
+ISODatetime
+===========
+
+Строка, содержащая дату-время в формате ISO8601_
+
+.. _ISO8601: https://www.cl.cam.ac.uk/~mgk25/iso-time.html
