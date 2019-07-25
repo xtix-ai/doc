@@ -17,7 +17,7 @@
 
 **Запрос**
 
-    .. http:post:: /v2/resources/orders
+    .. http:patch:: /v2/resources/orders
 
         :jsonparam status: Обязателен (``done`` | ``cancelled``)
 
@@ -30,7 +30,7 @@
 
     .. sourcecode:: http
 
-        PATCH /v2/resources/orders/5b0eab671b2042000ea83850 HTTP/1.1
+        PATCH /v2/resources/orders/5d39c3108cd381a4891e07e0 HTTP/1.1
         Authorization: key 9bd8359943b545500278875r49c5b96d
         Content-Type: application/json
 
@@ -47,124 +47,95 @@
 
         {
             "data": {
-                "code": "ztzoih9o",
-                "created_at": "2018-05-30 13:47:19",
-                "done_at": "2019-07-02 15:33:18",
-                "event": "5b0e8adc04bcc7000b2a279e",
-                "expired_after": "2018-05-30 13:57:19",
-                "id": "5b0eab671b2042000ea83850",
-                "number": 72,
-                "org": "5b0286ce517565000d9cb1ca",
+                "code": "97elgi8j",
+                "created_at": "2019-07-25 14:56:16",
+                "done_at": "2019-07-25 14:57:47",
+                "event": "5d31fbdd27649b0dff076117",
+                "expired_after": "2019-07-25 15:11:16",
+                "id": "5d39c3108cd381a4891e07e0",
+                "number": 54881,
+                "org": "5b04229196c055000d87c2b5",
                 "origin": "api",
                 "settings": {
                     "invitation": false,
-                    "send_tickets": true
+                    "send_tickets": false,
+                    "subscribe_agree": false
                 },
                 "status": "done",
                 "tickets": [
                     {
                         "barcode": null,
-                        "discount": "4500.00",
-                        "extra": "0.00",
-                        "full": "0.00",
-                        "id": "5b0e8afa9adc660001b0ab6c",
-                        "nominal": "0.00",
-                        "number": 110042,
-                        "price": "4500.00",
-                        "serial": "HTY",
-                        "set": "5b0e8afa04bcc7000b2a6ec1",
+                        "discount": "0.00",
+                        "extra": "6.00",
+                        "full": "156.00",
+                        "id": "5d31fbfb306fdcc187b91179",
+                        "nominal": "150.00",
+                        "number": 157495,
+                        "price": "150.00",
+                        "serial": "OOX",
+                        "set": "5d31fbfa27649b0dff07611b",
                         "status": "reserved"
                     }
                 ],
                 "values": {
-                    "discount": "4500.00",
-                    "extra": "0.00",
-                    "full": "0.00",
-                    "nominal": "0.00",
-                    "price": "4500.00",
+                    "discount": "0.00",
+                    "extra": "6.00",
+                    "full": "156.00",
+                    "nominal": "150.00",
+                    "price": "150.00",
                     "sets_values": {
-                        "5b0e8af004bcc7000b2a6ebd": {
-                            "discount": "5000.00",
-                            "id": "5b0e8af004bcc7000b2a6ebd",
-                            "nominal": "0.00",
-                            "price": "5000.00",
-                            "promocode": "5b0eab2d1b2042000db2438f"
+                        "5d31fbfa27649b0dff07611b": {
+                            "discount": "0.00",
+                            "id": "5d31fbfa27649b0dff07611b",
+                            "nominal": "150.00",
+                            "price": "150.00",
+                            "promocode": null
                         },
-                        "5b0e8af404bcc7000c7458b7": {
-                            "discount": "1000.00",
-                            "id": "5b0e8af404bcc7000c7458b7",
-                            "nominal": "0.00",
-                            "price": "1000.00",
-                            "promocode": "5b0eab2d1b2042000db2438f"
-                        },
-                        "5b0e8afa04bcc7000b2a6ec1": {
-                            "discount": "4500.00",
-                            "id": "5b0e8afa04bcc7000b2a6ec1",
-                            "nominal": "0.00",
-                            "price": "4500.00",
-                            "promocode": "5b0eab2d1b2042000db2438f"
-                        },
-                        "5b0e8b0304bcc7000b2a6ec5": {
-                            "discount": "3300.00",
-                            "id": "5b0e8b0304bcc7000b2a6ec5",
-                            "nominal": "0.00",
-                            "price": "3300.00",
-                            "promocode": "5b0eab2d1b2042000db2438f"
-                        },
-                        "5b0e8b1604bcc7000b2a6ec9": {
-                            "discount": "4000.00",
-                            "id": "5b0e8b1604bcc7000b2a6ec9",
-                            "nominal": "0.00",
-                            "price": "4000.00",
-                            "promocode": "5b0eab2d1b2042000db2438f"
+                        "5d31fbfa8a75c12c9d64de13": {
+                            "discount": "0.00",
+                            "id": "5d31fbfa8a75c12c9d64de13",
+                            "nominal": "1050.00",
+                            "price": "1050.00",
+                            "promocode": null
                         }
                     },
                     "viral_promocodes": []
                 },
-                "vendor": "5b0286ce517565000d9cb1ca",
+                "vendor": "5b02d6e9517565000d9cb1ce",
                 "vendor_data": {}
             },
             "refs": {
                 "events": {
-                    "5b0e8adc04bcc7000b2a279e": {
-                        "id": "5b0e8adc04bcc7000b2a279e",
+                    "5d31fbdd27649b0dff076117": {
+                        "id": "5d31fbdd27649b0dff076117",
                         "lifetime": {
-                            "finish": "2019-03-29 15:00:00",
-                            "start": "2019-03-22 11:00:00"
+                            "finish": "2019-08-28 21:50:00",
+                            "start": "2019-08-15 21:20:00"
                         },
-                        "org": "5b0286ce517565000d9cb1ca",
-                        "status": "finished",
+                        "org": "5b04229196c055000d87c2b5",
+                        "status": "public",
                         "timezone": "Europe/Moscow",
                         "title": {
-                            "desc": "Тест-111122",
-                            "text": "Для статистики-11122"
+                            "desc": "1",
+                            "text": "1234567890"
                         }
                     }
                 },
                 "partners": {
-                    "5b0286ce517565000d9cb1ca": {
-                        "id": "5b0286ce517565000d9cb1ca",
-                        "name": "New organiser"
-                    }
-                },
-                "promocodes": {
-                    "5b0eab2d1b2042000db2438f": {
-                        "code": "100",
-                        "discount": {
-                            "percentage": "100%"
-                        },
-                        "id": "5b0eab2d1b2042000db2438f",
-                        "lifetime": null,
-                        "sets": [],
-                        "tickets_count": {},
-                        "viral": false
+                    "5b02d6e9517565000d9cb1ce": {
+                        "id": "5b02d6e9517565000d9cb1ce",
+                        "name": "Rasp new"
+                    },
+                    "5b04229196c055000d87c2b5": {
+                        "id": "5b04229196c055000d87c2b5",
+                        "name": "My best org"
                     }
                 },
                 "sets": {
-                    "5b0e8afa04bcc7000b2a6ec1": {
-                        "id": "5b0e8afa04bcc7000b2a6ec1",
-                        "name": "Фан-зона левая сторона",
-                        "price": null,
+                    "5d31fbfa27649b0dff07611b": {
+                        "id": "5d31fbfa27649b0dff07611b",
+                        "name": "обычные",
+                        "price": "150.00",
                         "with_seats": false
                     }
                 }
