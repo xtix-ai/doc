@@ -10,3 +10,4 @@
    events
    order_create
    order_finish
+   refund_requests
