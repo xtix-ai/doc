@@ -43,19 +43,6 @@
                 "number": int
                 "org": objectid
                 "origin": 'api' | 'salespoint' | 'widget' | 'control_panel'
-                "payments": [
-                    {
-                        "id": objectid
-                        "type": '_testpay_core' | '_testpay_partner' | 'invoice' | 'platron' | 'cloudpayments' | 'payu' | 'stripe'
-                        "status": 'executed' | 'in_progress' | 'done' | 'cancelled'
-                        "amount": money
-                    },
-                ]
-                "promocodes": [
-                    {
-                        "id": objectid
-                    },
-                ]
                 "settings": {
                     "invitation": bool
                     "send_tickets": bool
@@ -134,21 +121,6 @@
                         "name": str
                     }
                 },
-                "promocodes": {
-                    id: {
-                        "code": str
-                        "discount": {
-                            "percentage"
-                        },
-                        "id": objectid
-                        "lifetime"
-                        "sets": [...],
-                        "tickets_count": {
-                            ...
-                        },
-                        "viral": bool
-                    },
-                },
                 "sets": {
                     id: {
                         "id": objectid
@@ -170,7 +142,7 @@
         Content-Type: application/json
 
         {
-            "event": "5c87d5871a2778000c7e7771"
+            "event": "5d31fbdd27649b0dff076117"
         }
 
 **Пример ответа**
@@ -182,11 +154,11 @@
 
         {
             "data": {
-                "created_at": "2019-07-02 13:54:15",
-                "event": "5c87d5871a2778000c7e7771",
-                "expired_after": "2019-07-02 14:09:15",
-                "id": "5d1b62074ed1c53b328ad4f0",
-                "number": 52906,
+                "created_at": "2019-07-25 14:41:11",
+                "event": "5d31fbdd27649b0dff076117",
+                "expired_after": "2019-07-25 14:56:11",
+                "id": "5d39bf878cd381a4891e07b7",
+                "number": 54877,
                 "org": "5b04229196c055000d87c2b5",
                 "origin": "api",
                 "settings": {
@@ -203,85 +175,53 @@
                     "nominal": "0.00",
                     "price": "0.00",
                     "sets_values": {
-                        "5c87d59e1a2778000bd96e58": {
+                        "5d31fbfa27649b0dff07611b": {
                             "discount": "0.00",
-                            "id": "5c87d59e1a2778000bd96e58",
-                            "nominal": "920.00",
-                            "price": "920.00",
+                            "id": "5d31fbfa27649b0dff07611b",
+                            "nominal": "150.00",
+                            "price": "150.00",
                             "promocode": null
                         },
-                        "5ca715ab7cf2a70015eeabba": {
+                        "5d31fbfa8a75c12c9d64de13": {
                             "discount": "0.00",
-                            "id": "5ca715ab7cf2a70015eeabba",
-                            "nominal": "0.00",
-                            "price": "0.00",
-                            "promocode": null
-                        },
-                        "5d073f870e9d2b63a2e558c3": {
-                            "discount": "0.00",
-                            "id": "5d073f870e9d2b63a2e558c3",
-                            "nominal": "100.00",
-                            "price": "100.00",
-                            "promocode": null
-                        },
-                        "5d073f970e9d2b63a2e558c7": {
-                            "discount": "0.00",
-                            "id": "5d073f970e9d2b63a2e558c7",
-                            "nominal": "110.00",
-                            "price": "110.00",
-                            "promocode": null
-                        },
-                        "5d073fc20e9d2b63a2e558cc": {
-                            "discount": "0.00",
-                            "id": "5d073fc20e9d2b63a2e558cc",
-                            "nominal": "120.00",
-                            "price": "120.00",
-                            "promocode": null
-                        },
-                        "5d073fc20e9d2b63a2e558d0": {
-                            "discount": "0.00",
-                            "id": "5d073fc20e9d2b63a2e558d0",
-                            "nominal": "130.00",
-                            "price": "130.00",
-                            "promocode": null
-                        },
-                        "5d073fc2a5f32c07a1b71b94": {
-                            "discount": "0.00",
-                            "id": "5d073fc2a5f32c07a1b71b94",
-                            "nominal": "140.00",
-                            "price": "140.00",
+                            "id": "5d31fbfa8a75c12c9d64de13",
+                            "nominal": "1050.00",
+                            "price": "1050.00",
                             "promocode": null
                         }
                     },
                     "viral_promocodes": []
                 },
-                "vendor": "5b04229196c055000d87c2b5",
+                "vendor": "5b02d6e9517565000d9cb1ce",
                 "vendor_data": {}
             },
             "refs": {
                 "events": {
-                    "5c87d5871a2778000c7e7771": {
-                        "id": "5c87d5871a2778000c7e7771",
+                    "5d31fbdd27649b0dff076117": {
+                        "id": "5d31fbdd27649b0dff076117",
                         "lifetime": {
-                            "finish": "2019-12-27 14:00:00",
-                            "start": "2019-12-27 13:00:00"
+                            "finish": "2019-08-28 21:50:00",
+                            "start": "2019-08-15 21:20:00"
                         },
                         "org": "5b04229196c055000d87c2b5",
                         "status": "public",
                         "timezone": "Europe/Moscow",
                         "title": {
-                            "desc": "ацуа",
-                            "text": "АЛЬФА_БАНК"
+                            "desc": "1",
+                            "text": "1234567890"
                         }
                     }
                 },
                 "partners": {
+                    "5b02d6e9517565000d9cb1ce": {
+                        "id": "5b02d6e9517565000d9cb1ce",
+                        "name": "Rasp new"
+                    },
                     "5b04229196c055000d87c2b5": {
                         "id": "5b04229196c055000d87c2b5",
-                        "name": "My best partner"
+                        "name": "My best org"
                     }
                 },
-                "promocodes": {},
                 "sets": {}
             }
         }
@@ -381,13 +321,115 @@
 
     .. sourcecode:: http
 
-        PATCH /v2/resources/orders/5d1b62074ed1c53b328ad4f0 HTTP/1.1
+        PATCH /v2/resources/orders HTTP/1.1
         Authorization: key 9bd8359943b545500278875r49c5b96d
         Content-Type: application/json
 
         {
             "random": {
-                "592841f8515e35002dead91e": 2
+                "5d31fbfa27649b0dff07611b": 1
+            }
+        }
+
+**Пример ответа**
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "data": {
+                "created_at": "2019-07-25 14:41:11",
+                "event": "5d31fbdd27649b0dff076117",
+                "expired_after": "2019-07-25 14:56:11",
+                "id": "5d39bf878cd381a4891e07b7",
+                "number": 54877,
+                "org": "5b04229196c055000d87c2b5",
+                "origin": "api",
+                "settings": {
+                    "invitation": false,
+                    "send_tickets": false,
+                    "subscribe_agree": false
+                },
+                "status": "executed",
+                "tickets": [
+                    {
+                        "barcode": null,
+                        "discount": "0.00",
+                        "extra": "6.00",
+                        "full": "156.00",
+                        "id": "5d31fbfb306fdcc187b91179",
+                        "nominal": "150.00",
+                        "number": 157495,
+                        "price": "150.00",
+                        "serial": "OOX",
+                        "set": "5d31fbfa27649b0dff07611b",
+                        "status": "reserved"
+                    }
+                ],
+                "values": {
+                    "discount": "0.00",
+                    "extra": "6.00",
+                    "full": "156.00",
+                    "nominal": "150.00",
+                    "price": "150.00",
+                    "sets_values": {
+                        "5d31fbfa27649b0dff07611b": {
+                            "discount": "0.00",
+                            "id": "5d31fbfa27649b0dff07611b",
+                            "nominal": "150.00",
+                            "price": "150.00",
+                            "promocode": null
+                        },
+                        "5d31fbfa8a75c12c9d64de13": {
+                            "discount": "0.00",
+                            "id": "5d31fbfa8a75c12c9d64de13",
+                            "nominal": "1050.00",
+                            "price": "1050.00",
+                            "promocode": null
+                        }
+                    },
+                    "viral_promocodes": []
+                },
+                "vendor": "5b02d6e9517565000d9cb1ce",
+                "vendor_data": {}
+            },
+            "refs": {
+                "events": {
+                    "5d31fbdd27649b0dff076117": {
+                        "id": "5d31fbdd27649b0dff076117",
+                        "lifetime": {
+                            "finish": "2019-08-28 21:50:00",
+                            "start": "2019-08-15 21:20:00"
+                        },
+                        "org": "5b04229196c055000d87c2b5",
+                        "status": "public",
+                        "timezone": "Europe/Moscow",
+                        "title": {
+                            "desc": "1",
+                            "text": "1234567890"
+                        }
+                    }
+                },
+                "partners": {
+                    "5b02d6e9517565000d9cb1ce": {
+                        "id": "5b02d6e9517565000d9cb1ce",
+                        "name": "Rasp new"
+                    },
+                    "5b04229196c055000d87c2b5": {
+                        "id": "5b04229196c055000d87c2b5",
+                        "name": "My best org"
+                    }
+                },
+                "sets": {
+                    "5d31fbfa27649b0dff07611b": {
+                        "id": "5d31fbfa27649b0dff07611b",
+                        "name": "обычные",
+                        "price": "150.00",
+                        "with_seats": false
+                    }
+                }
             }
         }
 

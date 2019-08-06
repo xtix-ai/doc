@@ -21,7 +21,6 @@ executed
 
     - :ref:`забронировать билеты <walkthrough/order_create/tickets>`
     - :ref:`добавить информацию о покупателе <extra/orders/customer>`
-    - :ref:`добавить промокоды к заказу <extra/orders/promocodes>`
     - :ref:`изменить параметр send_tickets <extra/orders/send_tickets>`
     - :ref:`добавить произвольные поля в заказ <extra/orders/vendor_data>`
     - :ref:`отменить <walkthrough/order_finish/status>`
