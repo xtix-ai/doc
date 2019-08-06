@@ -38,7 +38,7 @@
 
     .. sourcecode:: http
 
-        GET /v2/resources/orders?status=done,cancelled&created_at=2000-07-28T13,2020-07-28T13 HTTP/1.1
+        GET /v2/resources/orders?status=done,cancelled&created_at=2000-07-28T13:00:00,2020-07-28T13:00:00 HTTP/1.1
         Authorization: key 9bd8359943b545500278875r49c5b96d
 
 
@@ -53,16 +53,11 @@
             "data": [
                 {
                     "created_at": "2019-06-27 10:50:13",
-                    "custom_fields": {
-                        ...
-                    },
                     "event": "5cbd881dc406a70015d695f8",
                     "id": "5d149f651e53c7ce65454ab1",
                     "number": 52646,
                     "org": "5b0286ce517565000d9cb1ca",
                     "origin": "api",
-                    "payments": [],
-                    "promocodes": [],
                     "settings": {
                         ...
                     },

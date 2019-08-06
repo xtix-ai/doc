@@ -17,9 +17,9 @@
 
 **Запрос**
 
-    .. http:post:: /v2/resources/orders/
+    .. http:post:: /v2/resources/orders
 
-        :query status: Обязателен (``done`` | ``cancelled``)
+        :jsonparam status: Обязателен (``done`` | ``cancelled``)
 
 **Ответ**
 
@@ -49,10 +49,6 @@
             "data": {
                 "code": "ztzoih9o",
                 "created_at": "2018-05-30 13:47:19",
-                "custom_fields": {
-                    "order": [],
-                    "tickets": []
-                },
                 "done_at": "2019-07-02 15:33:18",
                 "event": "5b0e8adc04bcc7000b2a279e",
                 "expired_after": "2018-05-30 13:57:19",
@@ -60,13 +56,6 @@
                 "number": 72,
                 "org": "5b0286ce517565000d9cb1ca",
                 "origin": "api",
-                "payments": [],
-                "promocodes": [
-                    "5b0eab2d1b2042000db2438f"
-                ],
-                "sessions": {
-                    "utm": "5b0eab5d1b2042000db24390"
-                },
                 "settings": {
                     "invitation": false,
                     "send_tickets": true

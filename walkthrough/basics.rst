@@ -43,11 +43,30 @@ Ticketscloud API построено с учетом `REST`.
 
 Пример запроса:
 
+    .. sourcecode:: http
+
+        GET /v2/resources/orders HTTP/1.1
+        Authorization: key 9bd8359943b545500278875r49c5b96d
+
+Пример ответа:
+
     .. sourcecode:: js
 
-       http GET https://ticketscloud.com/v2/resources/orders?number=52899 Authorization:'key 9bd8359943b545500278875r49c5b96d'
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "data": [
+                ...
+            ],
+            "pagination": {
+                ...
+            },
+            "refs": {
+                ...
+            }
+        }
 
 .. warning::
     Все запросы к API осуществляются только через `HTTPS`.
     Запросы через `HTTP` будут отклонены со статусом :http:statuscode:`301`.
-

@@ -15,8 +15,8 @@
 
 .. http:get:: /v2/resources/refund_requests
 
-    :query created_at: Дата создания возврата, **ISODatetime** промежуток через запятую
-    :query finished_at: Дата завершения возврата, **ISODatetime** промежуток через запятую
+    :query created_at: Дата создания возврата, :ref:`isodatetime <extra/types/isodatetime>` промежуток через запятую
+    :query finished_at: Дата завершения возврата, :ref:`isodatetime <extra/types/isodatetime>` промежуток через запятую
     :query events: Фильтр по списку мероприятий
     :query status: Фильтр по списку статусов возратов (new | in_progress | approved | rejected)
     :query page: Порядковый номер страницы результатов запроса

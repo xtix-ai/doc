@@ -25,9 +25,9 @@
 
 **Ответ**:
 
-    - ``id`` **str**:*ObjectId* - id мероприятия
-    - ``created_at`` **str**:*ISODatetime* - дата создания
-    - ``updated_at`` **str**:*ISODatetime* - дата последнего изменения
+    - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id мероприятия
+    - ``created_at`` **str**::ref:`isodatetime <extra/types/isodatetime>` - дата создания
+    - ``updated_at`` **str**::ref:`isodatetime <extra/types/isodatetime>`- дата последнего изменения
     - ``lifetime`` **str**:*VEVENT*  - :ref:`vevent <extra/types/vevent>`, время проведения мероприятия
     - ``status`` **str** - текущий статус мероприятия. `public` — публичное мероприятие, можно продавать билеты)
 
@@ -44,7 +44,7 @@
 
     - ``org`` **object** информация об организаторе мероприятия
 
-       - ``id`` **str**:*ObjectId* - id организатора
+       - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id организатора
        - ``name`` **str** - название организатора
        - ``desc`` **str** - краткое описание
        - ``media`` **object** - media логотипы
@@ -52,7 +52,7 @@
          
     - ``venue`` место проведения
       
-       - ``id`` **str**:*ObjectId* - venue id
+       - ``id`` **str**::ref:`objectid <extra/types/objectid>` - venue id
        - ``address`` **str** - адрес
        - ``country`` страна
        - ``city`` город
@@ -64,7 +64,7 @@
 
     - ``sets`` билетные категории
 
-       - ``id``
+       - ``id`` **str**::ref:`objectid <extra/types/objectid>`
        - ``pos`` **int** - порядковый номер категории (для сортировки)
        - ``name`` **str** - название категории
        - ``amount`` **int** - общее количество билетов в сете
@@ -173,7 +173,7 @@
                             "url": "https://ticketscloud.com/s3/media.ticketscloud/stage/image/2018-05/5b04229196c055000c6688c7.jpg"
                         }
                     },
-                    "name": "\"Έλληνας διοργανωτής\"",
+                    "name": "My best partner",
                     "tags": [
                         "Театры",
                         "Выставки",
@@ -219,7 +219,7 @@
                             "url": "https://ticketscloud.com/s3/media.ticketscloud/stage/image/2018-05/5b04229196c055000c6688c7.jpg"
                         }
                     },
-                    "name": "\"Έλληνας διοργανωτής\"",
+                    "name": "My best partner",
                     "tags": [
                         "Театры",
                         "Выставки",
@@ -292,34 +292,47 @@
 Получаем список билетов с местами по мероприятию
 ================================================
 
-Получение списка билетов мероприятия, для категорий с рассадкой.
+
+Получение списка билетов мероприятия для категорий с рассадкой.
 
 **Зарпос**
 
-.. http:post:: /v1/resources/events/:id/tickets
+    .. http:get:: /v1/resources/events/:id/tickets
 
-   :query status: Фильтр по списку статусов (`vacant` | `reserved` | `sold` | `pending`). По умолчанию включены билеты во всех статусах, кроме `pending`.
-   :query sector: Фильтр по списку секторов
+       :query status: Фильтр-список по списку статусов (``vacant`` | ``reserved`` | ``sold`` | ``pending``). По умолчанию включены билеты во всех статусах, кроме ``pending``.
+       :query sector: Фильтр-список по списку секторов
 
 
 **Ответ**
 
-    - ``id`` id билета
-    - ``status`` одно из ``vacant``, ``reserved`` или ``sold``
-    - ``set`` билетная категория
-    - ``reserved_till`` если статус ``reserved``, то это время окончания конца резервирования
-    - ``seat`` Информация о месте проведения
+    .. sourcecode:: js
 
-        - ``row`` ряд
-        - ``number`` место
-        - ``sector`` сектор карты
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        [
+            {
+                "id": objectid
+                "number": int
+                "reserved_till": isodatetime | null
+                "seat": {
+                    "number": int
+                    "row": int
+                    "sector": objectid
+                },
+                "serial": str
+                "set": objectid
+                "status": str
+            },
+            ...
+        ]
 
 
 **Пример запроса**:
 
     .. sourcecode:: http
 
-        GET /v1/resources/events/5b0d157f445143000114e321/tickets?status=vacant,sold&sector=55abfa669cb5382abebd9fad HTTP/1.1
+        GET /v1/resources/events/5b0d157f445143000114e321/tickets?status=vacant&sector=55abfa669cb5382abebd9fad HTTP/1.1
         Authorization: key 9bd8359943b545500278875r49c5b96d
 
 
@@ -379,18 +392,18 @@
 
     Описание полей ответа:
 
-        - ``vendor`` **str**:*ObjectId* - id распространителя
-        - ``org`` **str**:*ObjectId* - id организатора
-        - ``meta_event`` **str**:*ObjectId* | **null** - cсылка на метаэвент
+        - ``vendor`` **str**::ref:`objectid <extra/types/objectid>` - id распространителя
+        - ``org`` **str**::ref:`objectid <extra/types/objectid>` - id организатора
+        - ``meta_event`` **str**::ref:`objectid <extra/types/objectid>` | **null** - cсылка на метаэвент
         - ``event`` **object** объект эвента :ref:`объект эвента <walkthrough/events/simple>`
         - ``settings`` **object** объект с настройками эвента
         - ``sets`` **object** объект с категориями билетов где ключ - id категории, значение объект категории:
 
-            - ``id`` **str**:*ObjectId* - id категории
+            - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id категории
             - ``name`` **str**
             - ``desc`` **str**
             - ``pos``
-            - ``sector`` **str**:*ObjectId* - id сектора
+            - ``sector`` **str**::ref:`objectid <extra/types/objectid>` - id сектора
             - ``amount`` **int** - кол-во билетов
             - ``amount_vacant`` **int** - кол-во билетов в статусе ``vacant``
             - ``with_seats`` **bool** - Категория с рассадкой/без
@@ -399,14 +412,14 @@
         - ``tickets`` **object** - Объект с билетами где ключ - id сектора,
             значение - объект с ключами -- рядами значениями билетами:
 
-            - ``id`` **str**:*ObjectId* - id билета
-            - ``set`` **str**:*ObjectId* - id категории
-            - ``status`` **str**:*ObjectdId* - Статус билета
+            - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id билета
+            - ``set`` **str**::ref:`objectid <extra/types/objectid>` - id категории
+            - ``status`` **str**::ref:`objectid <extra/types/objectid>` - Статус билета
             - ``reserved_till``
 
         - ``venue`` **object** - Объект с информацией о месте проведения мероприятия:
 
-            - ``id`` **str**:*ObjectId** - id площадки
+            - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id площадки
             - ``name`` **str**
             - ``desc`` **str**
             - ``address`` **str**

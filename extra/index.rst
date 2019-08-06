@@ -11,6 +11,5 @@
    orders
    orders_list
    refunds_list
-   tickets
    partner_legal
    types
