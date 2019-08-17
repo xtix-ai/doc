@@ -52,13 +52,21 @@
          
     - ``venue`` место проведения
       
-       - ``id`` **str**::ref:`objectid <extra/types/objectid>` - venue id
+       - ``id`` **str**::ref:`objectid <extra/types/objectid>`
        - ``address`` **str** - адрес
        - ``country`` страна
+          - ``id`` **str** - буквенное короткое латинское название
+          - ``name`` - ассоциативный массив названий на разных языках
        - ``city`` город
+          - ``id`` **int**
+          - ``country`` **str** - id страны
+          - ``name`` - ассоциативный массив названий на разных языках
+          - ``timezone`` **str** - временная зона
        - ``name`` **str** - название
        - ``desc`` **str** - краткое описание
        - ``point`` координата (`GeoJSON <http://geojson.org>`_'s point)
+          - ``coordinates`` **list** список двух вещественных координат
+          - ``type`` **str** - тип
 
     - ``map`` схема зала
 
@@ -76,14 +84,13 @@
        - ``seats`` **object** - row: numbers (**list**)
        - ``sector`` сектор
 
-    - ``rules`` правила
-
-       - ``id``
-       - ``cal`` :ref:`vevent <extra/types/vevent>`, время действия правила
-       - ``current`` **bool** - `true` если правило текущее
-       - ``price_org`` **str**:*Money* - номинальная цена
-       - ``price_extra`` - сервисный сбор
-       - ``price`` **str**:*Money* - конечная цена
+       - ``rules`` список правил
+          - ``id``
+          - ``cal`` :ref:`vevent <extra/types/vevent>`, время действия правила
+          - ``current`` **bool** - `true` если правило текущее
+          - ``price_org`` **str**:*Money* - номинальная цена
+          - ``price_extra`` - сервисный сбор
+          - ``price`` **str**:*Money* - конечная цена
 
 
 **Пример запроса**:
