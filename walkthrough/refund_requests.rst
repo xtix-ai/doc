@@ -33,6 +33,7 @@
                "status": "new" | "in_progress" | "approved" | "rejected",
                "culprit": "user" | "org",
                "created_at": ISODatetime,
+               "finished_at": ISODatetime,
                "delta": money // сумма возврата,
                "event": objectid,
                "org": objectid,
