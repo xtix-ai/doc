@@ -56,6 +56,9 @@
                 "number": 54881,
                 "org": "5b04229196c055000d87c2b5",
                 "origin": "api",
+                "promocodes": [
+                    "5b0eab2d1b2042000db2438f"
+                ],
                 "settings": {
                     "invitation": false,
                     "send_tickets": false,
@@ -89,14 +92,14 @@
                             "id": "5d31fbfa27649b0dff07611b",
                             "nominal": "150.00",
                             "price": "150.00",
-                            "promocode": null
+                            "promocode": "5b0eab2d1b2042000db2438f"
                         },
                         "5d31fbfa8a75c12c9d64de13": {
                             "discount": "0.00",
                             "id": "5d31fbfa8a75c12c9d64de13",
                             "nominal": "1050.00",
                             "price": "1050.00",
-                            "promocode": null
+                            "promocode": "5b0eab2d1b2042000db2438f"
                         }
                     },
                     "viral_promocodes": []
@@ -129,6 +132,17 @@
                     "5b04229196c055000d87c2b5": {
                         "id": "5b04229196c055000d87c2b5",
                         "name": "My best org"
+                    }
+                },
+                "promocodes": {
+                    "5b0eab2d1b2042000db2438f": {
+                        "code": "100",
+                        "discount": {
+                            "percentage": "0%"
+                        },
+                        "id": "5b0eab2d1b2042000db2438f",
+                        "lifetime": null,
+                        "viral": false
                     }
                 },
                 "sets": {

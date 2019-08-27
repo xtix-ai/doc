@@ -43,6 +43,9 @@
                 "number": int
                 "org": objectid
                 "origin": 'api' | 'salespoint' | 'widget' | 'control_panel'
+                "promocodes": [
+                    str
+                ]
                 "settings": {
                     "invitation": bool
                     "send_tickets": bool
@@ -121,6 +124,20 @@
                         "name": str
                     }
                 },
+                "promocodes": {
+                    id: {
+                        "code": str
+                        "discount": {
+                            "percentage" | "fix": str
+                        },
+                        "id": objectid
+                        "lifetime": {
+                            "start": isodatetime
+                            "finish": isodatetime
+                        },
+                        "viral": bool
+                    },
+                },
                 "sets": {
                     id: {
                         "id": objectid
@@ -161,6 +178,7 @@
                 "number": 54877,
                 "org": "5b04229196c055000d87c2b5",
                 "origin": "api",
+                "promocodes": [],
                 "settings": {
                     "invitation": false,
                     "send_tickets": false,
@@ -222,6 +240,7 @@
                         "name": "My best org"
                     }
                 },
+                "promocodes": {},
                 "sets": {}
             }
         }

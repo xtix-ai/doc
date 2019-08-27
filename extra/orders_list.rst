@@ -61,6 +61,7 @@
                     "number": 54881,
                     "org": "5b04229196c055000d87c2b5",
                     "origin": "api",
+                    "promocodes": [],
                     "settings": {
                         "invitation": false,
                         "send_tickets": false,
