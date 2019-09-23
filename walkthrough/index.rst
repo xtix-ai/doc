@@ -10,4 +10,5 @@
    events
    order_create
    order_finish
+   order_example
    refund_requests
