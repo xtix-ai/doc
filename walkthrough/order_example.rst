@@ -6,13 +6,14 @@
 
 .. note::
 
-    В этом примере с нуля создадим и проведем смешанный заказ: один билет с рассадкой, другой -- без
+    С нуля создадим и проведем смешанный заказ: один билет с рассадкой, другой -- без.
+    Будет два примера, отличающихся порядком добавления этих билетов.
 
 
-0. Получаем информацию о событиях
-=================================
+0. :ref:`Получаем <walkthrough/events/simple>` информацию о событиях
+====================================================================
 
-На этом этапе выбираем событие, на которое будем проводить заказ
+На этом этапе выбираем мероприятие, на которое будем проводить заказ
 
     .. sourcecode:: http
 
@@ -185,10 +186,10 @@
         ]
 
 
-1. Получаем информацию о билетах
-================================
+1. :ref:`Получаем <walkthrough/events/tickets>` информацию о билетах
+====================================================================
 
-Взяв id события из п.0, получаем его места (можно использовать фильтры)
+Взяв id события из п.0, получаем его места (можно использовать :ref:`фильтры <walkthrough/events/tickets>`)
 
     .. sourcecode:: http
 
@@ -246,10 +247,10 @@
         ]
 
 
-2. Создаем заказ (добавляем билет без места)
-============================================
+2a. Создаем заказ (добавляем билет :ref:`без места <walkthrough/order_create/random>`)
+======================================================================================
 
-Берем id сета из п.0
+Берем id добавляемого сета из п.0
 
     .. sourcecode:: http
 
@@ -351,10 +352,10 @@
         }
 
 
-3. Заполняем заказ (добавляем билет с местом) и закрываем его
-=============================================================
+3a. Заполняем заказ (добавляем билет :ref:`с местом <walkthrough/order_create/ticket>`)
+=======================================================================================
 
-Берем id места из п.1, но при этом еще добавляем id билета, полученного в ответе из п.2
+Берем id добавляемого места из п.1, но при этом еще добавляем id билета, полученного в ответе из п.2a
 
     .. sourcecode:: http
 
@@ -363,11 +364,262 @@
         Content-Type: application/json
 
         {
-            "status": "done",
             "tickets": [
                 "5d7135113f18da51a186ad16",
                 "5d7134962110d30a34e95cfe"
             ]
+        }
+
+
+    .. sourcecode:: js
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "data": {
+                "created_at": "2019-09-25 16:14:01",
+                "event": "5d7134962110d30a34e95b96",
+                "expired_after": "2019-09-25 16:29:01",
+                "id": "5d8b924971a0bf323bd6a6ed",
+                "number": 59743,
+                "org": "5ba10ea90c43fc000b0fc786",
+                "origin": "api",
+                "status": "executed",
+                "tickets": [
+                    {
+                        "barcode": null,
+                        "discount": "0.00",
+                        "extra": "560.00",
+                        "full": "6160.00",
+                        "id": "5d7135113f18da51a186ad16",
+                        "nominal": "5600.00",
+                        "number": 168475,
+                        "price": "5600.00",
+                        "serial": "PYX",
+                        "set": "5d7135112110d30a34e97e2d",
+                        "status": "reserved"
+                    },
+                    {
+                        "barcode": null,
+                        "discount": "0.00",
+                        "extra": "99.00",
+                        "full": "1089.00",
+                        "id": "5d7134962110d30a34e95cfe",
+                        "nominal": "990.00",
+                        "number": 135830,
+                        "price": "990.00",
+                        "seat": {
+                            "number": "14",
+                            "row": "2",
+                            "sector": "5a8dd58e6e55b2064c67c144"
+                        },
+                        "serial": "EOY",
+                        "set": "5d71353b2110d30a34e97e31",
+                        "status": "reserved"
+                    }
+                ],
+                "values": {
+                    "discount": "0.00",
+                    "extra": "659.00",
+                    "full": "7249.00",
+                    "nominal": "6590.00",
+                    "price": "6590.00",
+                    "sets_values": {
+                        "5d713505255895db3c30b0c5": {
+                            "discount": "0.00",
+                            "id": "5d713505255895db3c30b0c5",
+                            "nominal": "6666.00",
+                            "price": "6666.00",
+                            "promocode": null
+                        },
+                        ...
+                    },
+                    "viral_promocodes": []
+                },
+                "vendor": "5ba10ea90c43fc000b0fc786",
+            },
+            "refs": {
+                "events": {
+                    "5d7134962110d30a34e95b96": {
+                        "id": "5d7134962110d30a34e95b96",
+                        "lifetime": {
+                            "finish": "2020-06-12 18:00:00",
+                            "start": "2020-06-12 15:00:00"
+                        },
+                        "org": "5ba10ea90c43fc000b0fc786",
+                        "status": "public",
+                        "timezone": "Europe/Moscow",
+                        "title": {
+                            "desc": "ref",
+                            "text": "Slipknot"
+                        }
+                    }
+                },
+                "partners": {
+                    "5ba10ea90c43fc000b0fc786": {
+                        "id": "5ba10ea90c43fc000b0fc786",
+                        "name": "Тест VK Pay"
+                    }
+                },
+                "promocodes": {},
+                "sets": {
+                    "5d7135112110d30a34e97e2d": {
+                        "id": "5d7135112110d30a34e97e2d",
+                        "name": "Фан зона",
+                        "price": "5600.00",
+                        "with_seats": false
+                    },
+                    "5d71353b2110d30a34e97e31": {
+                        "id": "5d71353b2110d30a34e97e31",
+                        "name": "A2",
+                        "price": "990.00",
+                        "with_seats": true
+                    }
+                }
+            }
+        }
+
+
+2b. Создаем заказ (добавляем билет :ref:`с местом <walkthrough/order_create/ticket>`)
+=====================================================================================
+
+Берем id добавляемого места из п.1
+
+    .. sourcecode:: http
+
+        POST /v2/resources/orders/5d8b924971a0bf323bd6a6ed HTTP/1.1
+        Authorization: key 9bd8359943b545500278875r49c5b96d
+        Content-Type: application/json
+
+        {
+            "tickets": [
+                "5d7134962110d30a34e95cfe"
+            ]
+        }
+
+
+    .. sourcecode:: js
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        {
+            "data": {
+                "created_at": "2019-09-25 16:14:01",
+                "event": "5d7134962110d30a34e95b96",
+                "expired_after": "2019-09-25 16:29:01",
+                "id": "5d8b924971a0bf323bd6a6ed",
+                "number": 59743,
+                "org": "5ba10ea90c43fc000b0fc786",
+                "origin": "api",
+                "status": "executed",
+                "tickets": [
+                    {
+                        "barcode": null,
+                        "discount": "0.00",
+                        "extra": "99.00",
+                        "full": "1089.00",
+                        "id": "5d7134962110d30a34e95cfe",
+                        "nominal": "990.00",
+                        "number": 135830,
+                        "price": "990.00",
+                        "seat": {
+                            "number": "14",
+                            "row": "2",
+                            "sector": "5a8dd58e6e55b2064c67c144"
+                        },
+                        "serial": "EOY",
+                        "set": "5d71353b2110d30a34e97e31",
+                        "status": "reserved"
+                    }
+                ],
+                "values": {
+                    "discount": "0.00",
+                    "extra": "659.00",
+                    "full": "7249.00",
+                    "nominal": "6590.00",
+                    "price": "6590.00",
+                    "sets_values": {
+                        "5d713505255895db3c30b0c5": {
+                            "discount": "0.00",
+                            "id": "5d713505255895db3c30b0c5",
+                            "nominal": "6666.00",
+                            "price": "6666.00",
+                            "promocode": null
+                        },
+                        ...
+                    },
+                    "viral_promocodes": []
+                },
+                "vendor": "5ba10ea90c43fc000b0fc786",
+            },
+            "refs": {
+                "events": {
+                    "5d7134962110d30a34e95b96": {
+                        "id": "5d7134962110d30a34e95b96",
+                        "lifetime": {
+                            "finish": "2020-06-12 18:00:00",
+                            "start": "2020-06-12 15:00:00"
+                        },
+                        "org": "5ba10ea90c43fc000b0fc786",
+                        "status": "public",
+                        "timezone": "Europe/Moscow",
+                        "title": {
+                            "desc": "ref",
+                            "text": "Slipknot"
+                        }
+                    }
+                },
+                "partners": {
+                    "5ba10ea90c43fc000b0fc786": {
+                        "id": "5ba10ea90c43fc000b0fc786",
+                        "name": "Тест VK Pay"
+                    }
+                },
+                "promocodes": {},
+                "sets": {
+                    "5d71353b2110d30a34e97e31": {
+                        "id": "5d71353b2110d30a34e97e31",
+                        "name": "A2",
+                        "price": "990.00",
+                        "with_seats": true
+                    }
+                }
+            }
+        }
+
+
+3b. Заполняем заказ (добавляем билет :ref:`без места <walkthrough/order_create/random>`)
+========================================================================================
+
+Берем id добавляемого сета из п.2b (или из п.0), но при этом еще дописываем id сета от добавленного билета из п.2
+
+    .. sourcecode:: http
+
+        POST /v2/resources/orders HTTP/1.1
+        Authorization: key 9bd8359943b545500278875r49c5b96d
+        Content-Type: application/json
+
+        {
+            "random": {
+                "5d71353b2110d30a34e97e31": 1,
+                "5d7135112110d30a34e97e2d": 1
+            }
+        }
+
+
+4. :ref:`Завершаем <walkthrough/order_finish/begin>` заказ
+==========================================================
+
+    .. sourcecode:: http
+
+        PATCH /v2/resources/orders/5d8b924971a0bf323bd6a6ed HTTP/1.1
+        Authorization: key 9bd8359943b545500278875r49c5b96d
+        Content-Type: application/json
+
+        {
+            "status": "done"
         }
 
 
@@ -481,9 +733,3 @@
                 }
             }
         }
-
-
-.. note::
-
-    Можно было сделать наоборот: сначала добавить билет с местом, а потом -- без места. Это ни на что не влияет.
-    Стоит только не забывать "прокидывать" предыдущие добавленные билеты
