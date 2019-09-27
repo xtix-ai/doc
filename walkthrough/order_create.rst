@@ -245,12 +245,15 @@
             }
         }
 
+.. note::
+
+   ШК появляется только у заказа в статусе ``done``
+
 
 .. seealso::
 
    :ref:`Заказ в статусе executed <extra/lifecycle/executed>`,
    :ref:`Жизненный цикл заказа <extra/lifecycle/begin>`
-
 
 
 .. _walkthrough/order_create/tickets:

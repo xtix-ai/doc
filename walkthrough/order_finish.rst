@@ -17,7 +17,7 @@
 
 **Запрос**
 
-    .. http:patch:: /v2/resources/orders
+    .. http:patch:: /v2/resources/orders/:id
 
         :jsonparam status: Обязателен (``done`` | ``cancelled``)
 
@@ -160,6 +160,7 @@
 .. seealso::
 
    :ref:`Жизненный цикл заказа <extra/lifecycle/begin>`
+   :ref:`Пример проведения заказа <walkthrough/order_example/begin>`
 
 .. warning::
 
