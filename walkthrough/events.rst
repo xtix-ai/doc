@@ -30,6 +30,32 @@
     - ``updated_at`` **str**::ref:`isodatetime <extra/types/isodatetime>`- дата последнего изменения
     - ``lifetime`` **str**:*VEVENT*  - :ref:`vevent <extra/types/vevent>`, время проведения мероприятия
     - ``status`` **str** - текущий статус мероприятия. `public` — публичное мероприятие, можно продавать билеты)
+    - ``age_rating`` **int** - возрастное ограничение
+
+    - ``deal`` **object** информация о сделке
+
+       - ``org`` **str** - доля организатора
+       - ``agent`` **str** - доля агента
+       - ``extra`` **str** - доля сервисного сбора
+       - ``media`` **list of string** - список ссылкок на медиа
+
+    - ``partner`` **object** информация о партнере
+
+       - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id партнера
+       - ``desc`` **str** - описание партнера
+       - ``media`` **object** - медиа партнера
+       - ``name`` **str** - имя партнера
+       - ``tags`` **list of string** - теги категорий партнера
+       - ``contact`` **object** - контактная информация
+          - ``address`` **str** - адрес партнера
+          - ``email`` **str** - электронная почта партнера
+          - ``name`` **str** - имя контакта партнера
+          - ``phones`` **str** - телефон партнера
+          - ``www`` **str** - сайт партнера
+
+    - ``tags`` **list of string** - теги
+    - ``tickets_amount`` **int** - количество билетов всего
+    - ``tickets_amount_vacant`` **int** - количество доступных для продажи билетов
 
     - ``title`` **object**
     
