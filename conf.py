@@ -2,7 +2,7 @@ project = 'ticketscloud'
 copyright = '2018-2019, TicketsCloud'
 author = 'nndii'
 version = 'v2'
-release = 'v2-beta'
+release = 'v2'
 
 extensions = [
     'sphinxcontrib.httpdomain',
