@@ -9,6 +9,7 @@
 
    lifecycle
    orders
+   promocodes
    orders_list
    refunds_list
    partner_legal
