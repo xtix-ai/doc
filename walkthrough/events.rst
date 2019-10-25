@@ -54,7 +54,7 @@
           - ``www`` **str** - сайт партнера
 
     - ``tags`` **list of string** - теги
-    - ``tickets_amount`` **int** - количество билетов всего
+    - ``tickets_amount`` **int** - общее количество билетов
     - ``tickets_amount_vacant`` **int** - количество доступных для продажи билетов
 
     - ``title`` **object**
