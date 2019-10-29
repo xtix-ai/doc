@@ -75,7 +75,15 @@
        - ``desc`` **str** - краткое описание
        - ``media`` **object** - media логотипы
        - ``contact`` - контактная информация
-         
+
+    - ``legal_detail``: **object** юридическая информация
+
+        - ``name`` **str** - название юр.лица
+        - ``inn`` **str** - ИНН
+        - ``ogrn`` **str** - ОГРН (опционален)
+        - ``ogrnip`` **str** - ОГРНИП (опционален)
+        - ``address`` **str** - юридический адрес
+
     - ``venue`` место проведения
       
        - ``id`` **str**::ref:`objectid <extra/types/objectid>`
