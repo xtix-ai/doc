@@ -12,5 +12,4 @@
    promocodes
    orders_list
    refunds_list
-   partner_legal
    types
