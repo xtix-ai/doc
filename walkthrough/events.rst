@@ -27,8 +27,8 @@
 
     - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id мероприятия
     - ``created_at`` **str**::ref:`isodatetime <extra/types/isodatetime>` - дата создания
-    - ``updated_at`` **str**::ref:`isodatetime <extra/types/isodatetime>`- дата последнего изменения
-    - ``lifetime`` **str**:*VEVENT*  - :ref:`vevent <extra/types/vevent>`, время проведения мероприятия
+    - ``updated_at`` **str**::ref:`isodatetime <extra/types/isodatetime>` - дата последнего изменения
+    - ``lifetime`` **str**:*VEVENT*  - :ref:`vevent <extra/types/vevent>`, время проведения мероприятия (для отображения покупателям необходима поправка на часовой пояс места проведения)
     - ``status`` **str** - текущий статус мероприятия. `public` — публичное мероприятие, можно продавать билеты)
     - ``age_rating`` **int** - возрастное ограничение
 
