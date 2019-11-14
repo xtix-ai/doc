@@ -116,6 +116,8 @@
                             "desc": str
                             "text": str
                         }
+                        "venue": objectid
+                        "age_rating": int
                     }
                 },
                 "partners": {
@@ -145,6 +147,31 @@
                         "price": money
                         "with_seats": bool
                     },
+                },
+                "venues": {
+                    id: {
+                        "address": str
+                        "city": {
+                            "_id": int,
+                            "name": {
+                                "default": str
+                                "en": str
+                                "ru": str
+                            },
+                            "timezone": str
+                        },
+                        "country": {
+                            "_id": str
+                            "name": {
+                                "default": str
+                                "en": str
+                                "ru": str
+                            }
+                        },
+                        "desc": str
+                        "id": objectid
+                        "name": str
+                    }
                 }
             }
         }
@@ -227,7 +254,9 @@
                         "title": {
                             "desc": "1",
                             "text": "1234567890"
-                        }
+                        },
+                        "age_rating": 16,
+                        "venue": "552322649cb5384154e028b2"
                     }
                 },
                 "partners": {
@@ -241,7 +270,32 @@
                     }
                 },
                 "promocodes": {},
-                "sets": {}
+                "sets": {},
+                "venues": {
+                    "552322649cb5384154e028b2": {
+                        "address": "ул. Родионова, 4",
+                        "city": {
+                            "_id": 520555,
+                            "name": {
+                                "default": "Nizhniy Novgorod",
+                                "en": "Nizhny Novgorod",
+                                "ru": "Нижний Новгород"
+                            },
+                            "timezone": "Europe/Moscow"
+                        },
+                        "country": {
+                            "_id": "RU",
+                            "name": {
+                                "default": "Russia",
+                                "en": "Russia",
+                                "ru": "Россия"
+                            }
+                        },
+                        "desc": "MILO Concert Hall - новая большая профессиональная площадка в Нижнем Новгороде",
+                        "id": "552322649cb5384154e028b2",
+                        "name": "MILO Concert Hall"
+                    }
+                }
             }
         }
 
