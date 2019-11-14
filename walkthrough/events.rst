@@ -27,8 +27,8 @@
 
     - ``id`` **str**::ref:`objectid <extra/types/objectid>` - id мероприятия
     - ``created_at`` **str**::ref:`isodatetime <extra/types/isodatetime>` - дата создания
-    - ``updated_at`` **str**::ref:`isodatetime <extra/types/isodatetime>`- дата последнего изменения
-    - ``lifetime`` **str**:*VEVENT*  - :ref:`vevent <extra/types/vevent>`, время проведения мероприятия
+    - ``updated_at`` **str**::ref:`isodatetime <extra/types/isodatetime>` - дата последнего изменения
+    - ``lifetime`` **str**:*VEVENT*  - :ref:`vevent <extra/types/vevent>`, время проведения мероприятия (для отображения покупателям необходима поправка на часовой пояс места проведения)
     - ``status`` **str** - текущий статус мероприятия. `public` — публичное мероприятие, можно продавать билеты)
     - ``age_rating`` **int** - возрастное ограничение
 
@@ -75,7 +75,15 @@
        - ``desc`` **str** - краткое описание
        - ``media`` **object** - media логотипы
        - ``contact`` - контактная информация
-         
+
+    - ``legal_detail``: **object** юридическая информация
+
+        - ``name`` **str** - название юр.лица
+        - ``inn`` **str** - ИНН
+        - ``ogrn`` **str** - ОГРН (опционален)
+        - ``ogrnip`` **str** - ОГРНИП (опционален)
+        - ``address`` **str** - юридический адрес
+
     - ``venue`` место проведения
       
        - ``id`` **str**::ref:`objectid <extra/types/objectid>`
@@ -101,6 +109,7 @@
        - ``id`` **str**::ref:`objectid <extra/types/objectid>`
        - ``pos`` **int** - порядковый номер категории (для сортировки)
        - ``name`` **str** - название категории
+       - ``desc`` **str** - описание категории
        - ``amount`` **int** - общее количество билетов в сете
        - ``amount_vacant`` **int** - количество билетов, доступных для продажи
        - ``price_org`` **str**:*Money* - номинальная цена билета
