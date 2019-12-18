@@ -45,10 +45,12 @@
                     "culprit": "user",
                     "delta": "13500.00",
                     "event": "5b23b53b9c9b19000c6c4180",
+                    "refund_nominal" "13500.00",
                     "finished_at": "2018-07-24 13:26:14",
                     "id": "5b5728e886e7040069eb7f86",
                     "order": "5b57281886e704000b424741",
                     "org": "5b0286ce517565000d9cb1ca",
+                    "policy": "general",
                     "status": "approved",
                     "tickets": [
                         ...
