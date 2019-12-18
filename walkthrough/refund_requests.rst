@@ -42,8 +42,8 @@
                "org": objectid,
                "order": objectid,
                "policy": "general" | "law_ru_193",  // политика возврата.
-                                                    // ``general`` - стандартные условия.
-                                                    // ``law_ru_193`` - применяются условия по ФЗ-193
+                                                    // general - стандартные условия.
+                                                    // law_ru_193 - применяются условия по ФЗ-193
                "tickets": Array[objectid],
                "vendor": objectid
             }
