@@ -15,8 +15,9 @@
     .. http:post:: /v2/resources/refund_requests/
 
        :query order: Id заказа
-       :query culprit: Виновник возврата (``user``|``org``)
+       :query culprit: Виновник возврата (``user`` | ``org``)
        :query tickets: Список id билетов для возврата
+       :query requested_at: Дата и время заявки на возврат. Необязательный параметр.
 
 
 **Ответ**
@@ -34,10 +35,15 @@
                "culprit": "user" | "org",
                "created_at": ISODatetime,
                "finished_at": ISODatetime,
-               "delta": money // сумма возврата,
+               "requested_at": ISODatetime,
+               "refund_nominal": money // сумма возврата
+               "delta": money // Устарело. Необходимо использовать `refund_nominal`,
                "event": objectid,
                "org": objectid,
                "order": objectid,
+               "policy": "general" | "law_ru_193",  // политика возврата.
+                                                    // ``general`` - стандартные условия.
+                                                    // ``law_ru_193`` - применяются условия по ФЗ-193
                "tickets": Array[objectid],
                "vendor": objectid
             }
@@ -49,16 +55,18 @@
    .. sourcecode:: http
 
       POST /v2/resources/refund_requests HTTP/1.1
-      Authorization: key 9bd8359943b545500278875r49c5b96d
+      Authorization: key 9bd8359943b545500278875r49c5b88d
       Content-Type: application/json
-      
+
       {
-          "order": "5bfd0f7533836a000da16b41",
-          "culprit": "user",
-          "tickets": [
-              "5bfd0f7533836a000da16b41",
-          ]
-      }
+        "culprit": "user",
+        "order": "5def7c43e3ed5ae2a8d6908b",
+        "requested_at": "2019-12-15T13:01:02",
+        "tickets": [
+            "5dd5469b05fe4df8940eb613"
+        ]
+    }
+
 
 
 **Пример ответа**
@@ -70,101 +78,124 @@
 
         {
             "data": {
-                "created_at": "2019-07-05 09:54:46",
+                "created_at": "2019-12-18 12:46:28",
                 "culprit": "user",
-                "delta": "0.00",
-                "event": "5d1f1d568edbb6017b2d8d35",
-                "id": "5d1f1e668edbb6017b2d8db4",
-                "order": "5bfd0f7533836a000da16b41",
-                "org": "5b04229196c055000d87c2b5",
+                "customer_money": "1000.00",
+                "delta": "1000.00",
+                "event": "5dd5468f05fe4df8940eb602",
+                "id": "5dfa1fa437077b6b6ed0f6b3",
+                "order": "5def7c43e3ed5ae2a8d6908b",
+                "org": "5b2d06ac5c3eb3000c475e36",
+                "policy": "law_ru_193",
+                "refund_nominal": "1000.00",
+                "requested_at": "2019-12-15 13:01:02",
                 "status": "new",
                 "tickets": [
-                    "5bfd0f7533836a000da16b41",
+                    "5dd5469b05fe4df8940eb613"
                 ],
-                "vendor": "5b04229196c055000d87c2b5"
+                "vendor": "5b2d06ac5c3eb3000c475e36"
             },
             "refs": {
                 "events": {
-                    "5d1f1d568edbb6017b2d8d35": {
-                        "id": "5d1f1d568edbb6017b2d8d35",
+                    "5dd5468f05fe4df8940eb602": {
+                        "age_rating": 0,
+                        "id": "5dd5468f05fe4df8940eb602",
                         "lifetime": {
-                            "finish": "2019-07-12 16:00:00",
-                            "start": "2019-07-12 12:00:00"
+                            "finish": "2020-01-01 20:00:00",
+                            "start": "2020-01-01 17:00:00"
                         },
-                        "org": "5b04229196c055000d87c2b5",
+                        "org": "5b2d06ac5c3eb3000c475e36",
                         "status": "public",
                         "timezone": "Europe/Moscow",
                         "title": {
-                            "desc": "sdfgsdfg",
-                            "text": "dfgdsfg"
-                        }
+                            "desc": "Metal music for all",
+                            "text": "MetalGrid"
+                        },
+                        "venue": "583d9307515e350019da3ef6"
                     }
                 },
                 "orders": {
-                    "5bfd0f7533836a000da16b41": {
-                        "code": "rbbcmabl",
-                        "created_at": "2019-07-05 09:50:36",
-                        "done_at": "2019-07-05 09:50:36",
-                        "event": "5d1f1d568edbb6017b2d8d35",
-                        "expired_after": "2019-07-05 10:05:36",
-                        "id": "5d1f1d6c8edbb6017b2d8dad",
-                        "number": 37,
-                        "org": "5b04229196c055000d87c2b5",
-                        "origin": "control_panel",
+                    "5def7c43e3ed5ae2a8d6908b": {
+                        "code": "k0xvxvel",
+                        "created_at": "2019-12-10 11:06:43",
+                        "custom_fields": {
+                            "order": [],
+                            "tickets": []
+                        },
+                        "done_at": "2019-12-10 11:11:54",
+                        "event": "5dd5468f05fe4df8940eb602",
+                        "expired_after": "2019-12-10 11:21:43",
+                        "id": "5def7c43e3ed5ae2a8d6908b",
+                        "number": 121,
+                        "org": "5b2d06ac5c3eb3000c475e36",
+                        "origin": "api",
                         "payments": [],
+                        "promocodes": [],
                         "settings": {
-                            "customer": {
-                                "email": "duxamax@gmail.com",
-                                "lang": "ru"
-                            },
-                            "invitation": true,
-                            "send_tickets": true,
+                            "invitation": false,
+                            "send_tickets": false,
                             "subscribe_agree": false
                         },
                         "status": "done",
-                        "tickets": [],
+                        "tickets": [
+                            {
+                                "barcode": "61534165115017991",
+                                "discount": "0.00",
+                                "extra": "0.00",
+                                "full": "1000.00",
+                                "id": "5dd5469b05fe4df8940eb613",
+                                "nominal": "1000.00",
+                                "number": 324762,
+                                "price": "1000.00",
+                                "serial": "APP",
+                                "set": "5dd5469b05fe4df8940eb606",
+                                "status": "reserved"
+                            }
+                        ],
                         "values": {
                             "discount": "0.00",
                             "extra": "0.00",
-                            "full": "0.00",
-                            "nominal": "0.00",
-                            "price": "0.00",
+                            "full": "1000.00",
+                            "nominal": "1000.00",
+                            "price": "1000.00",
                             "sets_values": {
-                                "5d1f1d5e8edbb6017b2d8d39": {
+                                "5dd5469b05fe4df8940eb606": {
                                     "discount": "0.00",
-                                    "id": "5d1f1d5e8edbb6017b2d8d39",
-                                    "nominal": "123.00",
-                                    "price": "123.00",
+                                    "id": "5dd5469b05fe4df8940eb606",
+                                    "nominal": "1000.00",
+                                    "price": "1000.00",
                                     "promocode": null
                                 }
                             },
+                            "viral_promocodes": []
                         },
-                        "vendor": "5b04229196c055000d87c2b5",
+                        "vendor": "5b2d06ac5c3eb3000c475e36",
                         "vendor_data": {}
                     }
                 },
                 "partners": {
-                    "5b04229196c055000d87c2b5": {
-                        "id": "5b04229196c055000d87c2b5",
-                        "name": "Test Organizer"
+                    "5b2d06ac5c3eb3000c475e36": {
+                        "id": "5b2d06ac5c3eb3000c475e36",
+                        "name": "Funky Box"
                     }
                 },
                 "tickets": {
-                    "5bfd0f7533836a000da16b41": {
-                        "discount": "123.00",
+                    "5dd5469b05fe4df8940eb613": {
+                        "discount": "0.00",
                         "extra": "0.00",
-                        "full": "0.00",
-                        "id": "5d1f1d5e8edbb6017b2d8d3e",
-                        "nominal": "0.00",
-                        "number": 183393,
-                        "price": "123.00",
-                        "serial": "ABK",
-                        "set": "5d1f1d5e8edbb6017b2d8d39",
-                        "status": "refunded"
+                        "full": "1000.00",
+                        "id": "5dd5469b05fe4df8940eb613",
+                        "nominal": "1000.00",
+                        "number": 324762,
+                        "price": "1000.00",
+                        "serial": "APP",
+                        "set": "5dd5469b05fe4df8940eb606",
+                        "status": "reserved"
                     }
                 }
             }
         }
+
 
 
 .. _walkthrough/refund_requests/approve:
@@ -176,7 +207,7 @@
 
     .. http:patch:: /v2/resources/refund_requests/:refund_id
 
-       :query status: "approved" | "rejected**
+       :query status: ``approved`` | ``rejected``
 
 **Ответ**
 
@@ -187,11 +218,10 @@
 
    .. sourcecode:: http
 
-      PATCH /v2/resources/refund_requests/5d1f1e668edbb6017b2d8db4 HTTP/1.1
-      Authorization: key 9bd8359943b545500278875r49c5b96d
+      PATCH /v2/resources/refund_requests/5dfa1fa437077b6b6ed0f6b3 HTTP/1.1
+      Authorization: key 9bd8359943b545500278875r49c5b88d
       Content-Type: application/json
-      
+
       {
           "status": "approved"
       }
-
