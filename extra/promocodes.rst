@@ -20,8 +20,8 @@ c кодом ответа 400. В остальных случаях возвра
 
     .. http:post:: /v2/services/promocodes/check
 
-            - **event** (str)
-            - **code** (str)
+            :jsonparam event: Id заказа (str)
+            :jsonparam code: код (str)
 
 
 **Ответ**

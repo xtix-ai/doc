@@ -352,7 +352,7 @@
 
     .. http:patch:: /v2/resources/orders/:id
 
-        :query tickets: список id билетов
+        :jsonparam tickets: список id билетов
 
 **Пример запроса**
 
@@ -391,7 +391,7 @@
 
     .. http:patch:: /v2/resources/orders/:id
 
-        :query random: массив: ключ -- id категории, значение -- кол-во мест
+        :jsonparam random: массив: ключ -- id категории, значение -- кол-во мест
 
 **Пример запроса**
 

@@ -27,7 +27,7 @@
 
     .. http:post:: /v2/resources/orders/:id
 
-        :query settings:
+        :jsonparam settings: Словарь с одним ключом customer, содержащим:
 
             - **name** (str)
             - **email** (str)
@@ -117,7 +117,7 @@
 
     .. http:post:: /v2/resources/orders/:id
 
-        :query vendor_data:
+        :jsonparam vendor_data:
 
             - **order_id**  (str) (Необязательно) Номер заказа в системе распространителя. Максимальная длина 64 символа
             - **raw** (object) Объект с произвольными полями.
@@ -212,7 +212,7 @@
 
     .. http:post:: /v2/resources/orders/:id
 
-        :query settings:
+        :jsonparam settings:
 
             - **send_tickets** (bool)
 
@@ -304,7 +304,7 @@
 
     .. http:patch:: /v2/resources/orders/:id
 
-        :query promocodes: (list of string)
+        :jsonparam promocodes: (list of string)
 
 **Ответ**
 

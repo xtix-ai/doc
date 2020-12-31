@@ -14,10 +14,10 @@
 
     .. http:post:: /v2/resources/refund_requests/
 
-       :query order: Id заказа
-       :query culprit: Виновник возврата (``user`` | ``org``)
-       :query tickets: Список id билетов для возврата
-       :query requested_at: Дата и время заявки на возврат. Необязательный параметр.
+       :jsonparam order: Id заказа
+       :jsonparam culprit: Виновник возврата (``user`` | ``org``)
+       :jsonparam tickets: Список id билетов для возврата
+       :jsonparam requested_at: Дата и время заявки на возврат. Необязательный параметр.
 
 
 **Ответ**
@@ -207,7 +207,7 @@
 
     .. http:patch:: /v2/resources/refund_requests/:refund_id
 
-       :query status: ``approved`` | ``rejected``
+       :jsonparam status: ``approved`` | ``rejected``
 
 **Ответ**
 
