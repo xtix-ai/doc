@@ -27,7 +27,7 @@
 
     .. http:post:: /v2/resources/orders/:id
 
-        :jsonparam settings: Словарь с одним ключом customer, содержащим:
+        :jsonparam settings: объект с одним ключом customer и соответствующим ему значением, содержащим:
 
             - **name** (str)
             - **email** (str)
