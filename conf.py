@@ -1,5 +1,5 @@
 project = 'ticketscloud'
-copyright = '2018-2024, TicketsCloud'
+copyright = '2018-2024, Ticketscloud'
 author = 'nndii'
 version = 'v2'
 release = 'v2'
@@ -24,5 +24,5 @@ html_static_path = ['_static']
 
 primary_domain = 'http'
 http_index_shortname = 'API Reference'
-http_index_localname = 'TicketsCloud HTTP API'
+http_index_localname = 'Ticketscloud HTTP API'
 http_index_grouping = False
