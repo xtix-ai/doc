@@ -1,5 +1,5 @@
 project = 'ticketscloud'
-copyright = '2018-2019, TicketsCloud'
+copyright = '2018-2024, TicketsCloud'
 author = 'nndii'
 version = 'v2'
 release = 'v2'
