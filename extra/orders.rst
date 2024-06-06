@@ -25,7 +25,7 @@
 
 **Запрос**
 
-    .. http:post:: /v2/resources/orders/:id
+    .. http:patch:: /v2/resources/orders/:id
 
         :jsonparam settings: объект с одним ключом customer и соответствующим ему значением, содержащим:
 
@@ -115,7 +115,7 @@
 
 **Запрос**
 
-    .. http:post:: /v2/resources/orders/:id
+    .. http:patch:: /v2/resources/orders/:id
 
         :jsonparam vendor_data:
 
@@ -210,7 +210,7 @@
 
 **Запрос**
 
-    .. http:post:: /v2/resources/orders/:id
+    .. http:patch:: /v2/resources/orders/:id
 
         :jsonparam settings:
 

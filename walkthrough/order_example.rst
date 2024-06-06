@@ -269,7 +269,7 @@ id сетов -- например, `5d7135112110d30a34e97e2d`.
 
     .. sourcecode:: http
 
-        POST /v2/resources/orders/5d8b924971a0bf323bd6a6ed HTTP/1.1
+        POST /v2/resources/orders HTTP/1.1
         Authorization: key 9bd8359943b545500278875r49c5b96d
         Content-Type: application/json
 
@@ -378,7 +378,7 @@ id сетов -- например, `5d7135112110d30a34e97e2d`.
 
     .. sourcecode:: http
 
-        POST /v2/resources/orders HTTP/1.1
+        PATCH /v2/resources/orders/5d8b924971a0bf323bd6a6ed HTTP/1.1
         Authorization: key 9bd8359943b545500278875r49c5b96d
         Content-Type: application/json
 

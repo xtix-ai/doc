@@ -167,7 +167,7 @@
 
 **Запрос**
 
-.. http:get:: /v2/resources/orders/export
+.. http:post:: /v2/resources/orders/export
 
     :query created_at: Дата создания заказа в формате ISO от и до, через запятую
     :query status: Список статусов заказа
