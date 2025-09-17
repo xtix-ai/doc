@@ -1,2 +1,2 @@
-Ticketscloud_v2's documentation
+XTIX_v2's documentation
 ===============================

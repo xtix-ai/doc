@@ -13,8 +13,8 @@
 ===========================
 
 .. warning::
-    Вместо данного сервиса используйте `Events <https://github.com/ticketscloud/docs/blob/master/doc/docs.md#Event>`_
-    gRPC-сервиса `tc-simple <https://github.com/ticketscloud/docs>`_.
+    Вместо данного сервиса используйте `Events <https://github.com/xtix-ai/docs/blob/master/doc/docs.md#Event>`_
+    gRPC-сервиса `tc-simple <https://github.com/xtix-ai/docs>`_.
 
 Мероприятия можно получить запросом `/v1/services/simple/events`.
 В поле `events` содержится список эвентов, по которым у вас заключена сделка с организатором.
@@ -167,7 +167,7 @@
                 "org": {
                     "contact": {
                         "address": "Greek",
-                        "email": "mail_org@ticketscloud.org",
+                        "email": "mail_org@xtix.ai",
                         "name": "",
                         "phones": [
                             "79666666666"
@@ -183,7 +183,7 @@
                             "id": "5b04229196c055000c6688c6",
                             "length": 15715,
                             "md5hash": "d71dfeeb9fae5391903c7f9e05431b9e",
-                            "url": "https://ticketscloud.com/s3/media.ticketscloud/stage/image/2018-05/5b04229196c055000c6688c6.jpg"
+                            "url": "https://xtix.ai/s3/media.XTIX/stage/image/2018-05/5b04229196c055000c6688c6.jpg"
                         },
                         "logo_original": {
                             "author": "5b04229196c055000d87c2b5",
@@ -191,7 +191,7 @@
                             "id": "5b04229196c055000d87c2b7",
                             "length": 10626,
                             "md5hash": "75dd76e10455d79f14591dc677d8e334",
-                            "url": "https://ticketscloud.com/s3/media.ticketscloud/stage/image/2018-05/5b04229196c055000d87c2b7.jpg"
+                            "url": "https://xtix.ai/s3/media.XTIX/stage/image/2018-05/5b04229196c055000d87c2b7.jpg"
                         },
                         "logo_small": {
                             "author": "5b04229196c055000d87c2b5",
@@ -199,7 +199,7 @@
                             "id": "5b04229196c055000c6688c7",
                             "length": 23865,
                             "md5hash": "7aaf9478b8104da351586514097b09f9",
-                            "url": "https://ticketscloud.com/s3/media.ticketscloud/stage/image/2018-05/5b04229196c055000c6688c7.jpg"
+                            "url": "https://xtix.ai/s3/media.XTIX/stage/image/2018-05/5b04229196c055000c6688c7.jpg"
                         }
                     },
                     "name": "My best org",
@@ -219,7 +219,7 @@
                 "partner": {
                     "contact": {
                         "address": "г. Москва, Графский переулок, дом 14, строение 2, 4 этаж",
-                        "email": "mail_partner@ticketscloud.org",
+                        "email": "mail_partner@xtix.ai",
                         "name": null,
                         "phones": [
                             "+79123456789"
@@ -362,8 +362,8 @@
 ================================================
 
 .. warning::
-    Вместо данного сервиса используйте `Seats <https://github.com/ticketscloud/docs/blob/master/doc/docs.md#Seat>`_
-    gRPC-сервиса `tc-simple <https://github.com/ticketscloud/docs>`_.
+    Вместо данного сервиса используйте `Seats <https://github.com/xtix-ai/docs/blob/master/doc/docs.md#Seat>`_
+    gRPC-сервиса `tc-simple <https://github.com/xtix-ai/docs>`_.
 
 Получение списка билетов мероприятия для категорий с рассадкой.
 

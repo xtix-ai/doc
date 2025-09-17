@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = ticketscloud_v2
+SPHINXPROJ    = XTIX_v2
 SOURCEDIR     = .
 BUILDDIR      = _build
 
