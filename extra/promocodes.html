@@ -1,0 +1,356 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Промокоды &#8212; XTIX v2 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Работа со списком заказов" href="orders_list.html" />
+    <link rel="prev" title="Действия с заказом" href="orders.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="orders_list.html" title="Работа со списком заказов"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="orders.html" title="Действия с заказом"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Продвинутое использование</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="extra-promocodes-begin">
+<span id="id1"></span><h1>Промокоды<a class="headerlink" href="#extra-promocodes-begin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extra-promocodes-check">
+<span id="id2"></span><h2>Проверка промокода<a class="headerlink" href="#extra-promocodes-check" title="Permalink to this headline">¶</a></h2>
+<p>Существует возможность проверить актуальность промокода для мероприятия.
+В случае если промокод невозможно применить возвращается ответ BadRequest
+c кодом ответа 400. В остальных случаях возвращаются параметры промкомода
+и ограничения на его использование.</p>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="post">
+<dt id="post--v2-services-promocodes-check">
+<code class="descname">POST </code><code class="descname">/v2/services/promocodes/check</code><a class="headerlink" href="#post--v2-services-promocodes-check" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> – id мероприятия (str)</li>
+<li><strong>code</strong> – код (str)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    &quot;data&quot;: {
+        &quot;discount&quot;: {           // Размер скидки промокода, в процентах
+            &quot;percentage&quot;: str   // или фиксированной величины. Одновременно
+            &quot;fix&quot;: str          // может быть только один из параметров.
+        },
+        &quot;lifetime&quot;: {           // Ограничение по времени действия промокода.
+            &quot;finish&quot;: iso8601   // Необязательное поле.
+            &quot;start&quot;: iso8601
+        },
+        &quot;sets&quot;: [oid, ... ],    // Ограничение по категориям билетов на которые
+                                // действует скидка. Пустой массив означает
+                                // отсутствие ограничений.
+
+        &quot;tickets_count&quot;: {      // Ограничение по количеству билетов в заказе,
+                                // на которое дейтвует скидка.
+            &quot;min&quot;: int          // min - минимальное количество билетов в заказе,
+                                // после которого начинает начисляться скидка.
+                                // Необязательное поле.
+            &quot;max&quot;: int          // max - максимальное количество билетов в заказе,
+                                // после которого скидка больше не начисляется.
+                                // Необязательное поле.
+        }
+    },
+    &quot;refs&quot;: {
+        &quot;sets&quot;: {
+            oid: {
+                &quot;id&quot;: oid      // id категории
+                &quot;name&quot;: str    // название категории
+                &quot;price&quot;: str   // цена категории (оригинальная, без скидки)
+            }
+            ...
+        }
+    }
+}
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="id3">
+<h3>Примеры<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/v2/services/promocodes/check</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fix100&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5db2d8504d9134a8c7ec2cf5&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;fix&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100.00&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;sets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="s2">&quot;tickets_count&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;sets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/v2/services/promocodes/check</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d765a4a221988d7da985875&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;percentage&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;25%&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;lifetime&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;finish&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-11-30 20:59:00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;start&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-10-30 21:00:00&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;sets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;5d765a59221988d7da985879&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;tickets_count&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;min&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;sets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;5d765a59221988d7da985879&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d765a59221988d7da985879&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Билетище&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1099.00&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/v2/services/promocodes/check</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;not_exists&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d765a4a221988d7da985875&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">400</span><span class="w"> </span><span class="nx">Bad</span><span class="w"> </span><span class="nx">Request</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;error&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;HTTPBadRequest&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;reason&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Promocode not found&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Промокоды</a><ul>
+<li><a class="reference internal" href="#extra-promocodes-check">Проверка промокода</a><ul>
+<li><a class="reference internal" href="#id3">Примеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="orders.html"
+                          title="Previous page">&larr; Действия с заказом</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="orders_list.html"
+                          title="Next page">&rarr; Работа со списком заказов</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/extra/promocodes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="orders_list.html" title="Работа со списком заказов"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="orders.html" title="Действия с заказом"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Продвинутое использование</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2025, XTIX.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

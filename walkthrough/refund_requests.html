@@ -1,0 +1,530 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Шаг 4: Возврат заказа &#8212; XTIX v2 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Продвинутое использование" href="../extra/index.html" />
+    <link rel="prev" title="Пример проведения заказа" href="order_example.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../extra/index.html" title="Продвинутое использование"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="order_example.html" title="Пример проведения заказа"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Пошаговая интеграция для распространителей</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="walkthrough-refund-requests-begin">
+<span id="id1"></span><h1>Шаг 4: Возврат заказа<a class="headerlink" href="#walkthrough-refund-requests-begin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="walkthrough-refund-requests-create">
+<span id="id2"></span><h2>Создание возврата<a class="headerlink" href="#walkthrough-refund-requests-create" title="Permalink to this headline">¶</a></h2>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="post">
+<dt id="post--v2-resources-refund_requests-">
+<code class="descname">POST </code><code class="descname">/v2/resources/refund_requests/</code><a class="headerlink" href="#post--v2-resources-refund_requests-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>order</strong> – Id заказа</li>
+<li><strong>culprit</strong> – Виновник возврата (<code class="docutils literal notranslate"><span class="pre">user</span></code> | <code class="docutils literal notranslate"><span class="pre">org</span></code>)</li>
+<li><strong>tickets</strong> – Список id билетов для возврата</li>
+<li><strong>requested_at</strong> – Дата и время заявки на возврат. Необязательный параметр.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<p id="walkthrough-refund-requests-object">Объект возврата</p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;new&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;in_progress&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;approved&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;rejected&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;culprit&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;org&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODatetime</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;finished_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODatetime</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;requested_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODatetime</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;refund_nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span><span class="w"> </span><span class="c1">// сумма возврата</span>
+<span class="w">        </span><span class="s2">&quot;delta&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span><span class="w"> </span><span class="c1">// Устарело. Необходимо использовать `refund_nominal`,</span>
+<span class="w">        </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;order&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;policy&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;general&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;law_ru_193&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// политика возврата.</span>
+<span class="w">                                             </span><span class="c1">// general - стандартные условия.</span>
+<span class="w">                                             </span><span class="c1">// law_ru_193 - применяются условия по ФЗ-193</span>
+<span class="w">        </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="nb">Array</span><span class="p">[</span><span class="nx">objectid</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/v2/resources/refund_requests</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b88d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;culprit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5def7c43e3ed5ae2a8d6908b&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requested_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-15T13:01:02&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;5dd5469b05fe4df8940eb613&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-18 12:46:28&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;culprit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;customer_money&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;delta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5468f05fe4df8940eb602&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dfa1fa437077b6b6ed0f6b3&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5def7c43e3ed5ae2a8d6908b&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b2d06ac5c3eb3000c475e36&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;law_ru_193&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;refund_nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;requested_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-15 13:01:02&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;5dd5469b05fe4df8940eb613&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;vendor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b2d06ac5c3eb3000c475e36&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;refs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5dd5468f05fe4df8940eb602&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;age_rating&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5468f05fe4df8940eb602&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;lifetime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;finish&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-01-01 20:00:00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-01-01 17:00:00&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b2d06ac5c3eb3000c475e36&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Europe/Moscow&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Metal music for all&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MetalGrid&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;venue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;583d9307515e350019da3ef6&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;orders&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5def7c43e3ed5ae2a8d6908b&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;k0xvxvel&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-10 11:06:43&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;custom_fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">                    </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;done_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-10 11:11:54&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5468f05fe4df8940eb602&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;expired_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-12-10 11:21:43&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5def7c43e3ed5ae2a8d6908b&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b2d06ac5c3eb3000c475e36&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;origin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;payments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">                </span><span class="nt">&quot;promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">                </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;invitation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;send_tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;subscribe_agree&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;done&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;barcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;61534165115017991&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;extra&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;full&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5469b05fe4df8940eb613&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">324762</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;APP&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;set&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5469b05fe4df8940eb606&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;reserved&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;extra&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;full&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;sets_values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;5dd5469b05fe4df8940eb606&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5469b05fe4df8940eb606&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;promocode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;viral_promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;vendor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b2d06ac5c3eb3000c475e36&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;vendor_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;partners&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5b2d06ac5c3eb3000c475e36&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b2d06ac5c3eb3000c475e36&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Funky Box&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5dd5469b05fe4df8940eb613&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;extra&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;full&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5469b05fe4df8940eb613&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">324762</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;APP&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;set&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5dd5469b05fe4df8940eb606&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;reserved&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>Ошибки при создании возврата<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="66%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Сообщение</th>
+<th class="head">Причина</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&lt;field&gt; is required</td>
+<td>не указано поле &lt;field&gt;</td>
+</tr>
+<tr class="row-odd"><td>culprit Value ‘&lt;value&gt;’ not in list of avaiable values [‘user’, ‘org’]</td>
+<td>неверно указан виновник возврата</td>
+</tr>
+<tr class="row-even"><td>Order &lt;order_id&gt; not found</td>
+<td>не найден заказ</td>
+</tr>
+<tr class="row-odd"><td>Operation failed: less than three days before event start</td>
+<td>меньше 3 дней до начала, по ФЗ-193
+возврат невозможен</td>
+</tr>
+<tr class="row-even"><td>Operation failed: event already start</td>
+<td>мероприятие началось, по ФЗ-193
+возврат невозможен</td>
+</tr>
+<tr class="row-odd"><td>Operation failed: there is discounted ticket</td>
+<td>билет со скидкой, возврат невозможен</td>
+</tr>
+<tr class="row-even"><td>Operation failed: Mixed percentage values of tickets in one refund</td>
+<td>билеты с разными скидками,
+возврат невозможен</td>
+</tr>
+<tr class="row-odd"><td>bad culprit: &lt;value&gt;</td>
+<td>неверно указан виновник возврата</td>
+</tr>
+<tr class="row-even"><td>wrong order (id: &lt;order_id&gt;) status: &lt;order_status&gt;</td>
+<td>заказ не в статусе done</td>
+</tr>
+<tr class="row-odd"><td>Refund with culprit core must take all tickets from order</td>
+<td>в возврате не все билеты</td>
+</tr>
+<tr class="row-even"><td>Value Error</td>
+<td>возврат не создался,
+точная причина неизвестна</td>
+</tr>
+<tr class="row-odd"><td>bad tickets</td>
+<td>указаны билеты не из заказа</td>
+</tr>
+<tr class="row-even"><td>Unexpected situation</td>
+<td>ошибка при создании платежей</td>
+</tr>
+<tr class="row-odd"><td>RefundRequest in wrong status &lt;refund_status&gt; for create refund payment</td>
+<td>неверный статус возврата
+при создании платежей</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Пример ошибки</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;errors&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;culprit Value &#39;idunno&#39; not in list of avaiable values [&#39;user&#39;, &#39;org&#39;]&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tickets list length is less than 1&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="walkthrough-refund-requests-approve">
+<span id="id4"></span><h2>Подтверждение и отмена возврата<a class="headerlink" href="#walkthrough-refund-requests-approve" title="Permalink to this headline">¶</a></h2>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-refund_requests--refund_id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/refund_requests/:refund_id</code><a class="headerlink" href="#patch--v2-resources-refund_requests--refund_id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>status</strong> – <code class="docutils literal notranslate"><span class="pre">approved</span></code> | <code class="docutils literal notranslate"><span class="pre">rejected</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><a class="reference internal" href="#walkthrough-refund-requests-object"><span class="std std-ref">Объект возврата</span></a></div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/refund_requests/5dfa1fa437077b6b6ed0f6b3</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b88d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;approved&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>При ошибках возвращается список текстовых сообщений:</p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;errors&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;Incorrect status &lt;status&gt; for this operation&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h2>Ошибки при подтверждении возврата<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id6">
+<h2>Ошибки при отмене возврата<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Сообщение</th>
+<th class="head">Причина</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Cant reject refund request &lt;id refund&gt;,
+one of payments in status done</td>
+<td>нельзя отменить возврат, потому что
+один из платежей уже в статусе <cite>done</cite></td>
+</tr>
+<tr class="row-odd"><td>Cant reject refund request &lt;id refund&gt;,
+one of payments in status in_progress</td>
+<td>нельзя отменить возврат, потому что
+один из платежей уже в статусе
+<cite>in_progress</cite></td>
+</tr>
+<tr class="row-even"><td>Failed to reject refund request &lt;id refund&gt;</td>
+<td>Нельзя отменить возврат, возврат
+сменил статус с new/in_progress на
+другой</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Шаг 4: Возврат заказа</a><ul>
+<li><a class="reference internal" href="#walkthrough-refund-requests-create">Создание возврата</a></li>
+<li><a class="reference internal" href="#id3">Ошибки при создании возврата</a></li>
+<li><a class="reference internal" href="#walkthrough-refund-requests-approve">Подтверждение и отмена возврата</a></li>
+<li><a class="reference internal" href="#id5">Ошибки при подтверждении возврата</a></li>
+<li><a class="reference internal" href="#id6">Ошибки при отмене возврата</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="order_example.html"
+                          title="Previous page">&larr; Пример проведения заказа</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="../extra/index.html"
+                          title="Next page">&rarr; Продвинутое использование</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/walkthrough/refund_requests.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../extra/index.html" title="Продвинутое использование"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="order_example.html" title="Пример проведения заказа"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Пошаговая интеграция для распространителей</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2025, XTIX.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

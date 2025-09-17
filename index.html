@@ -1,0 +1,261 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Документация XTIX v2 API &#8212; XTIX v2 documentation</title>
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Пошаговая интеграция для распространителей" href="walkthrough/index.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="walkthrough/index.html" title="Пошаговая интеграция для распространителей"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">XTIX v2 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="xtix-v2-api">
+<h1>Документация XTIX v2 API<a class="headerlink" href="#xtix-v2-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Содержание<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="walkthrough/index.html">Пошаговая интеграция для распространителей</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/basics.html">Базовые понятия</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/basics.html#url">Основные URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/basics.html#walkthrough-basics-authorization">Авторизация</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/events.html">Шаг 1: Информация о мероприятии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/order_create.html">Шаг 2: Создание заказа</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_create.html#walkthrough-order-create-create">Создание</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_create.html#walkthrough-order-create-tickets">Резервирование билетов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="walkthrough/order_create.html#tickets">Поле <code class="docutils literal notranslate"><span class="pre">tickets</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="walkthrough/order_create.html#random">Поле <code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="walkthrough/order_create.html#all-or-nothing">Поле <code class="docutils literal notranslate"><span class="pre">all_or_nothing</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/order_finish.html">Шаг 3: Завершение заказа</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_finish.html#walkthrough-order-finish-status">Смена статуса заказа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/order_example.html">Пример проведения заказа</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#id2">0. <code class="docutils literal notranslate"><span class="pre">Получаем</span></code> информацию о событиях</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#id3">1. Получаем информацию о билетах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#a">2a. Создаем заказ (добавляем билет <code class="docutils literal notranslate"><span class="pre">без</span> <span class="pre">места</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#id5">3a. Заполняем заказ (добавляем билет <code class="docutils literal notranslate"><span class="pre">с</span> <span class="pre">местом</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#b">2b. Создаем заказ (добавляем билет <code class="docutils literal notranslate"><span class="pre">с</span> <span class="pre">местом</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#id6">3b. Заполняем заказ (добавляем билет <code class="docutils literal notranslate"><span class="pre">без</span> <span class="pre">места</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/order_example.html#id7">4. <code class="docutils literal notranslate"><span class="pre">Завершаем</span></code> заказ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="walkthrough/refund_requests.html">Шаг 4: Возврат заказа</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/refund_requests.html#walkthrough-refund-requests-create">Создание возврата</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/refund_requests.html#id3">Ошибки при создании возврата</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/refund_requests.html#walkthrough-refund-requests-approve">Подтверждение и отмена возврата</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/refund_requests.html#id5">Ошибки при подтверждении возврата</a></li>
+<li class="toctree-l3"><a class="reference internal" href="walkthrough/refund_requests.html#id6">Ошибки при отмене возврата</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extra/index.html">Продвинутое использование</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extra/lifecycle.html">Жизненный цикл заказа</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra/lifecycle.html#extra-lifecycle-diagram-simple">Список состояний (статусов) заказа без платежей</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extra/lifecycle.html#executed">executed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extra/lifecycle.html#done">done</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extra/lifecycle.html#cancelled">cancelled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extra/lifecycle.html#expired">expired</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra/orders.html">Действия с заказом</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra/orders.html#extra-orders-customer">Добавить информацию о покупателе</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/orders.html#extra-orders-vendor-data">Добавить произвольную информацию в <code class="docutils literal notranslate"><span class="pre">объект</span> <span class="pre">заказа</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/orders.html#email">Отправка билетов покупателю на email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/orders.html#extra-orders-promocodes">Добавить промокоды к заказу</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extra/orders.html#id5">Ошибки при работе с промокодами</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra/promocodes.html">Промокоды</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra/promocodes.html#extra-promocodes-check">Проверка промокода</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extra/promocodes.html#id3">Примеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra/orders_list.html">Работа со списком заказов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra/orders_list.html#extra-orders-list-get">Получение списка заказов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/orders_list.html#extra-orders-list-send-to-email">Экспорт списка заказов на почту</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra/refunds_list.html">Работа со списком возвратов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra/refunds_list.html#extra-refunds-list-get">Получаем список возвратов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra/types.html">Повторяющиеся сущности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra/types.html#vevent">VEVENT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/types.html#media">Media</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/types.html#objectid">ObjectId</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra/types.html#isodatetime">ISODatetime</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Дополнительно<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="#">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Документация XTIX v2 API</a><ul>
+<li><a class="reference internal" href="#id1">Содержание</a></li>
+<li><a class="reference internal" href="#id2">Дополнительно</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="walkthrough/index.html"
+                          title="Next page">&rarr; Пошаговая интеграция для распространителей</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="walkthrough/index.html" title="Пошаговая интеграция для распространителей"
+             >next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">XTIX v2 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2025, XTIX.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

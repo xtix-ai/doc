@@ -1,0 +1,704 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Действия с заказом &#8212; XTIX v2 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Промокоды" href="promocodes.html" />
+    <link rel="prev" title="Жизненный цикл заказа" href="lifecycle.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="promocodes.html" title="Промокоды"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="lifecycle.html" title="Жизненный цикл заказа"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Продвинутое использование</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="extra-orders-begin">
+<span id="id1"></span><h1>Действия с заказом<a class="headerlink" href="#extra-orders-begin" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Все действия с заказом, кроме его создания, делаются по запросу <a class="reference internal" href="../walkthrough/order_finish.html#patch--v2-resources-orders--id" title="PATCH /v2/resources/orders/:id"><code class="xref http http-patch docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/v2/resources/orders/:id</span></code></a>.
+В один запрос одновременно может быть добавленно нескольно действий.
+Все запросы на изменение конкретного заказа, должны делаться синхронно.
+В случае получения запроса до конца обработки предыдущего,
+будет возвращена ошибка <a class="reference external" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10">409 Conflict</a>.</p>
+<p>Это ограничение касается только работы с одним заказом,
+а работать одновременно с несколькими заказами можно.</p>
+<p class="last">В ответ на все PATCH запросы приходит обновленный <a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">объект заказа</span></a></p>
+</div>
+<div class="section" id="extra-orders-customer">
+<span id="id2"></span><h2>Добавить информацию о покупателе<a class="headerlink" href="#extra-orders-customer" title="Permalink to this headline">¶</a></h2>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-orders--id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/orders/:id</code><a class="headerlink" href="#patch--v2-resources-orders--id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>settings</strong> – <p>объект с одним ключом customer и соответствующим ему значением, содержащим:</p>
+<ul>
+<li><strong>name</strong> (str)</li>
+<li><strong>email</strong> (str)</li>
+<li><strong>phone</strong> (str)</li>
+<li><strong>lang</strong> (en|ru)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">Объект заказа</span></a></p>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/orders/5bacf64ea0eb2f000c45160a</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;customer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hello@world.ru&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;lang&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ru&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ivan Ivanov&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79991234576&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-09-27 15:25:02&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b23b53b9c9b19000c6c4180&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;expired_after&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-11-16 00:00:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5bacf64ea0eb2f000c45160a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">41564</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;origin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="s2">&quot;settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;customer&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;email&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;hello@world.ru&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;lang&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ru&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Ivan Ivanov&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;phone&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;+79991234576&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;invitation&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;send_tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;executed&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;vendor_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="extra-orders-vendor-data">
+<span id="id3"></span><h2>Добавить произвольную информацию в <a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">объект заказа</span></a><a class="headerlink" href="#extra-orders-vendor-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-orders--id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/orders/:id</code><a class="headerlink" href="#patch--v2-resources-orders--id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>vendor_data</strong> – <ul>
+<li><strong>order_id</strong>  (str) (Необязательно) Номер заказа в системе распространителя. Максимальная длина 64 символа</li>
+<li><strong>raw</strong> (object) Объект с произвольными полями.</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<div class="last line-block">
+<div class="line">Максимальное кол-во ключей в поле <code class="docutils literal notranslate"><span class="pre">raw</span></code> - 20</div>
+<div class="line">Максимальная длина ключа - 40 символов</div>
+<div class="line">Все значения - String с максимальной длиной 128 символов.</div>
+</div>
+</div>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">Объект заказа</span></a></p>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/orders/5bacf64ea0eb2f000c45160a</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;vendor_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5bacf64ea0eb2f000c45160a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;raw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;enable_call_to_customer&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;call_counter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-09-27 15:25:02&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b23b53b9c9b19000c6c4180&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;expired_after&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-11-16 00:00:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5bacf64ea0eb2f000c45160a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">41564</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;origin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="s2">&quot;settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;executed&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;vendor_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;order_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5bacf64ea0eb2f000c45160a&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;raw&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;enable_call_to_customer&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;call_counter&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="email">
+<span id="extra-orders-send-tickets"></span><h2>Отправка билетов покупателю на email<a class="headerlink" href="#email" title="Permalink to this headline">¶</a></h2>
+<p>При значении <code class="docutils literal notranslate"><span class="pre">true</span></code> билеты отправляет платформа XTIX на <code class="docutils literal notranslate"><span class="pre">email</span></code>,
+указанный в поле <a class="reference internal" href="#extra-orders-customer"><span class="std std-ref">customer</span></a>.
+По умолчанию <code class="docutils literal notranslate"><span class="pre">false</span></code>, тогда билеты генерируете и отправляете вы. Обязательное условие — наличие баркода.</p>
+<p>Изменить <code class="docutils literal notranslate"><span class="pre">email</span></code> можно только при статусе заказа <code class="docutils literal notranslate"><span class="pre">executed</span></code>, для этого надо обновить данные <code class="docutils literal notranslate"><span class="pre">customer</span></code>, точно так же как и при первичном добавлении.</p>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-orders--id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/orders/:id</code><a class="headerlink" href="#patch--v2-resources-orders--id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>settings</strong> – <ul>
+<li><strong>send_tickets</strong> (bool)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">Объект заказа</span></a></p>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/orders/5bacf64ea0eb2f000c45160a</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;send_tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-09-27 15:25:02&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b23b53b9c9b19000c6c4180&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;expired_after&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-11-16 00:00:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5bacf64ea0eb2f000c45160a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">41564</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;origin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="s2">&quot;settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;send_tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;executed&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;vendor_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>У нас нет требований к дизайну билета, кроме наличия обязательной информации на нём.</p>
+<dl class="last docutils">
+<dt>Билет должен содержать:</dt>
+<dd><ul class="first last simple">
+<li>баркод</li>
+<li>серия</li>
+<li>номер</li>
+<li>категория</li>
+<li>ряд-место (если с рассадкой)</li>
+<li>цена</li>
+<li>площадка (название-адрес)</li>
+<li>дата-время начала в часовом поясе площадки</li>
+<li>название мероприятия</li>
+<li>наименование юридического лица, инн, огрн, адрес (если не ИП)</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="extra-orders-promocodes">
+<span id="id4"></span><h2>Добавить промокоды к заказу<a class="headerlink" href="#extra-orders-promocodes" title="Permalink to this headline">¶</a></h2>
+<p>Регистр применяемых к заказу промокодов не важен</p>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-orders--id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/orders/:id</code><a class="headerlink" href="#patch--v2-resources-orders--id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>promocodes</strong> – (list of string)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">Объект заказа</span></a></p>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/orders/5bacf64ea0eb2f000c45160a</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;PROMO100&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-09-27 15:25:02&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b23b53b9c9b19000c6c4180&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;expired_after&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2018-11-16 00:00:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5bacf64ea0eb2f000c45160a&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">41564</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;origin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;5d664d392a4191909a568b40&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;executed&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;barcode&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;extra&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;46.12&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;full&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;946.12&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d664830b8a2cb5ce0576457&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;900.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">142278</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;serial&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;BKC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;set&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d6648306b23e8a5f90ef047&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;reserved&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;extra&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;46.12&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;full&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;946.12&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;900.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;sets_values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;5d6648306b23e8a5f90ef047&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d6648306b23e8a5f90ef047&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;900.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;promocode&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d664d392a4191909a568b40&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;5d664830e4c685ae48bd2d3d&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d664830e4c685ae48bd2d3d&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;400.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;500.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;promocode&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d664d392a4191909a568b40&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;viral_promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b0286ce517565000d9cb1ca&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;vendor_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;5d664d392a4191909a568b40&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;code&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;promo100&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;fix&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;100.00&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d664d392a4191909a568b40&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;viral&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;sets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;5d6648306b23e8a5f90ef047&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d6648306b23e8a5f90ef047&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Партер&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1000.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;with_seats&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Промокод может быть как на конкретную сумму, так и на процент:</p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;5d66b9f9a80b147cadf87583&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d66b9f9a80b147cadf87583&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;code&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;promo5%&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;percentage&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5%&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;viral&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="id5">
+<h3>Ошибки при работе с промокодами<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">code</th>
+<th class="head">msg</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>promocode_not_found</td>
+<td>Promocode not found</td>
+</tr>
+<tr class="row-odd"><td>promocode_already_used</td>
+<td>Promocode already used</td>
+</tr>
+<tr class="row-even"><td>promocode_limit_min_tickets</td>
+<td>Need more tickets in order for promocode activation /
+Mimimum count of tickets in order for promocode activation is {}</td>
+</tr>
+<tr class="row-odd"><td>promocode_apply_info</td>
+<td>Cant apply promocode by some reason</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Успешность применения промокода не влияет на код ответа</p>
+</div>
+<p><strong>Пример ошибки</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;errors&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;code&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;promocode_not_found&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;msg&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Promocode not found&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Действия с заказом</a><ul>
+<li><a class="reference internal" href="#extra-orders-customer">Добавить информацию о покупателе</a></li>
+<li><a class="reference internal" href="#extra-orders-vendor-data">Добавить произвольную информацию в <code class="docutils literal notranslate"><span class="pre">объект</span> <span class="pre">заказа</span></code></a></li>
+<li><a class="reference internal" href="#email">Отправка билетов покупателю на email</a></li>
+<li><a class="reference internal" href="#extra-orders-promocodes">Добавить промокоды к заказу</a><ul>
+<li><a class="reference internal" href="#id5">Ошибки при работе с промокодами</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="lifecycle.html"
+                          title="Previous page">&larr; Жизненный цикл заказа</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="promocodes.html"
+                          title="Next page">&rarr; Промокоды</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/extra/orders.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="promocodes.html" title="Промокоды"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="lifecycle.html" title="Жизненный цикл заказа"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Продвинутое использование</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2025, XTIX.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

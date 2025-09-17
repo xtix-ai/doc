@@ -1,0 +1,859 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Шаг 2: Создание заказа &#8212; XTIX v2 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Шаг 3: Завершение заказа" href="order_finish.html" />
+    <link rel="prev" title="Шаг 1: Информация о мероприятии" href="events.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="order_finish.html" title="Шаг 3: Завершение заказа"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="events.html" title="Шаг 1: Информация о мероприятии"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Пошаговая интеграция для распространителей</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="walkthrough-order-create-begin">
+<span id="id1"></span><h1>Шаг 2: Создание заказа<a class="headerlink" href="#walkthrough-order-create-begin" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Примеры ответов и запросов в данном разделе упрощены.
+Тем не менее этого достаточно для интеграции.
+Детальная информация по каждому разделу присутствует в блоках <em>См. также</em></p>
+</div>
+<div class="section" id="walkthrough-order-create-create">
+<span id="id2"></span><h2>Создание<a class="headerlink" href="#walkthrough-order-create-create" title="Permalink to this headline">¶</a></h2>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="post">
+<dt id="post--v2-resources-orders">
+<code class="descname">POST </code><code class="descname">/v2/resources/orders</code><a class="headerlink" href="#post--v2-resources-orders" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> – Обязателен</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Ответ</strong></p>
+<p id="walkthrough-order-create-object">Объект заказа</p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">        </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;executed&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;in_progress&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;cancelled&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;expired&#39;</span>
+<span class="w">        </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">        </span><span class="s2">&quot;done_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">        </span><span class="s2">&quot;expired_after&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">        </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">        </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="kr">int</span>
+<span class="w">        </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">        </span><span class="s2">&quot;origin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;api&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;salespoint&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;widget&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;control_panel&#39;</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="nx">str</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">        </span><span class="s2">&quot;settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;invitation&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">bool</span>
+<span class="w">            </span><span class="s2">&quot;send_tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">bool</span>
+<span class="w">            </span><span class="s2">&quot;courier&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">bool</span>
+<span class="w">            </span><span class="s2">&quot;customer&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;email&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">email</span>
+<span class="w">                </span><span class="s2">&quot;phone&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;lang&quot;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;en&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;ru&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;serial&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="kr">int</span>
+<span class="w">                </span><span class="s2">&quot;seat&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;row&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                    </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                    </span><span class="s2">&quot;sector&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                </span><span class="s2">&quot;extra&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                </span><span class="s2">&quot;full&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">        </span><span class="s2">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">            </span><span class="s2">&quot;extra&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">            </span><span class="s2">&quot;full&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">            </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">            </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">            </span><span class="s2">&quot;sets_values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                    </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span><span class="w"> </span><span class="c1">// price with discount</span>
+<span class="w">                    </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                    </span><span class="s2">&quot;promocode&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">None</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">...</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="s2">&quot;viral_promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[...]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">        </span><span class="s2">&quot;vendor_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;order_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">            </span><span class="s2">&quot;raw&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">...</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;events&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;lifetime&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;finish&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">                    </span><span class="s2">&quot;start&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;timezone&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;desc&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                    </span><span class="s2">&quot;text&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="s2">&quot;venue&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;age_rating&quot;</span><span class="o">:</span><span class="w"> </span><span class="kr">int</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;partners&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;code&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;percentage&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;fix&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;lifetime&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;start&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">                    </span><span class="s2">&quot;finish&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">isodatetime</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;viral&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">bool</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;sets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">money</span>
+<span class="w">                </span><span class="s2">&quot;with_seats&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">bool</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;venues&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;address&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;city&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="kr">int</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="s2">&quot;default&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                        </span><span class="s2">&quot;en&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                        </span><span class="s2">&quot;ru&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="s2">&quot;timezone&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;country&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="s2">&quot;default&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                        </span><span class="s2">&quot;en&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                        </span><span class="s2">&quot;ru&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;desc&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">objectid</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">str</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/v2/resources/orders</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbdd27649b0dff076117&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 14:41:11&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;expired_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 14:56:11&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d39bf878cd381a4891e07b7&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">54877</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;origin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;invitation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;send_tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;subscribe_agree&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;executed&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;extra&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;full&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sets_values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;promocode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;5d31fbfa8a75c12c9d64de13&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa8a75c12c9d64de13&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1050.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1050.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;promocode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;viral_promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;vendor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;vendor_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;refs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;lifetime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;finish&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-08-28 21:50:00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-08-15 21:20:00&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Europe/Moscow&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;age_rating&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;venue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;552322649cb5384154e028b2&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;partners&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rasp new&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My best org&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">        </span><span class="nt">&quot;sets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">        </span><span class="nt">&quot;venues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;552322649cb5384154e028b2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ул. Родионова, 4&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">520555</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nizhniy Novgorod&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;en&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nizhny Novgorod&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;ru&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Нижний Новгород&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Europe/Moscow&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RU&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Russia&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;en&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Russia&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;ru&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Россия&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MILO Concert Hall - новая большая профессиональная площадка в Нижнем Новгороде&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;552322649cb5384154e028b2&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MILO Concert Hall&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">ШК появляется только у заказа в статусе <code class="docutils literal notranslate"><span class="pre">done</span></code></p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../extra/lifecycle.html#extra-lifecycle-executed"><span class="std std-ref">Заказ в статусе executed</span></a>,
+<a class="reference internal" href="../extra/lifecycle.html#extra-lifecycle-begin"><span class="std std-ref">Жизненный цикл заказа</span></a></p>
+</div>
+<dl class="docutils">
+<dt><strong>Возможные ошибки при создании заказа</strong></dt>
+<dd><p class="first">При ошибках возвращается список текстовых сообщений:</p>
+<div class="last highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;Event &lt;event_id&gt; not found&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Сообщение</th>
+<th class="head">Причина</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Event &lt;event_id&gt; not found</td>
+<td>не найдено мероприятие для заказа</td>
+</tr>
+<tr class="row-odd"><td>Deal not found</td>
+<td>не найдена сделка</td>
+</tr>
+<tr class="row-even"><td>Promokey needed</td>
+<td>промоключ должен быть</td>
+</tr>
+<tr class="row-odd"><td>Promokey not founded</td>
+<td>промоключ не найден</td>
+</tr>
+<tr class="row-even"><td>Promokey expired</td>
+<td>промоключ истек</td>
+</tr>
+<tr class="row-odd"><td>Promokey fully reserved</td>
+<td>промоключ полностью зарезервирован</td>
+</tr>
+<tr class="row-even"><td>Promokey already reserved</td>
+<td>промоключ уже зарезервирован</td>
+</tr>
+<tr class="row-odd"><td>Only one of tickets or random can be set</td>
+<td>только один: tickets или random может быть установлено</td>
+</tr>
+<tr class="row-even"><td>‘tickets’ or ‘random’ must be</td>
+<td>обязан быть: tickets или random</td>
+</tr>
+<tr class="row-odd"><td>Cant use promocode when event have promotion</td>
+<td>нельзя использовать промокод, пока
+на мероприятии действует промоакция</td>
+</tr>
+<tr class="row-even"><td>expired_after is not changable</td>
+<td>время жизни не может быть изменено</td>
+</tr>
+<tr class="row-odd"><td>max expired_after is {dt}</td>
+<td>время жизни истекло &lt;dt :%Y-%m-%d %H:%M:%S&gt;</td>
+</tr>
+<tr class="row-even"><td>Promokey needed to add these tickets</td>
+<td>необходим промоключ, чтобы добавить эти билеты</td>
+</tr>
+<tr class="row-odd"><td>ticket (id = {}) does not belong to current event</td>
+<td>билет не относится к текущему мероприятию</td>
+</tr>
+<tr class="row-even"><td>value should be formatted ‘YYYY-MM-DD’</td>
+<td>для дополнительного поля “Дата”,
+значение имеет неверный формат</td>
+</tr>
+<tr class="row-odd"><td>value should be True or False</td>
+<td>для дополнительного поля “Галочка”,
+значение должно быть булевым</td>
+</tr>
+<tr class="row-even"><td>value is not a list</td>
+<td>для дополнительного поля “Выбор нескольких вариантов”,
+значение должно быть списком</td>
+</tr>
+<tr class="row-odd"><td>list length is less than &lt;len&gt;</td>
+<td>для дополнительного поля “Выбор нескольких вариантов”,
+значение должно быть длиннее чем &lt;len&gt;</td>
+</tr>
+<tr class="row-even"><td>list length is greater than &lt;len&gt;</td>
+<td>для дополнительного поля “Выбор нескольких вариантов”,
+значение должно быть короче чем &lt;len&gt;</td>
+</tr>
+<tr class="row-odd"><td>value is less than &lt;value&gt;</td>
+<td>для дополнительного поля “Выбор одного варианта”,
+значение должно быть больше чем &lt;value&gt;</td>
+</tr>
+<tr class="row-even"><td>value is greater than &lt;value&gt;</td>
+<td>для дополнительного поля “Выбор одного варианта”,
+значение должно быть меньше чем &lt;value&gt;</td>
+</tr>
+<tr class="row-odd"><td>value should be less than &lt;value&gt;</td>
+<td>для дополнительного поля “Выбор одного варианта”,
+значение должно быть меньше либо равно &lt;value&gt;</td>
+</tr>
+<tr class="row-even"><td>value should be greater than &lt;value&gt;</td>
+<td>для дополнительного поля “Выбор одного варианта”,
+значение должно быть больше либо равно &lt;value&gt;</td>
+</tr>
+<tr class="row-odd"><td>value is not a string</td>
+<td>для дополнительного поля “Текст/Длинный текст”,
+значение должно быть представлено строкой</td>
+</tr>
+<tr class="row-even"><td>blank value is not allowed</td>
+<td>для дополнительного поля “Текст/Длинный текст”,
+значение не должно быть пустым</td>
+</tr>
+<tr class="row-odd"><td>String is shorter than &lt;len&gt; characters</td>
+<td>для дополнительного поля “Текст/Длинный текст”,
+значение должно быть длиннее &lt;len&gt; символов</td>
+</tr>
+<tr class="row-even"><td>String is longer than &lt;len&gt; characters</td>
+<td>для дополнительного поля “Текст/Длинный текст”,
+значение должно быть короче &lt;len&gt; символов</td>
+</tr>
+<tr class="row-odd"><td>does not match pattern &lt;pattern&gt;</td>
+<td>для дополнительного поля “Текст/Длинный текст”,
+значение должно соответствовать формату &lt;pattern&gt;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="walkthrough-order-create-tickets">
+<span id="id3"></span><h2>Резервирование билетов<a class="headerlink" href="#walkthrough-order-create-tickets" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Все действия с заказом, кроме его создания, делаются по запросу <a class="reference internal" href="order_finish.html#patch--v2-resources-orders--id" title="PATCH /v2/resources/orders/:id"><code class="xref http http-patch docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/v2/resources/orders/:id</span></code></a>.
+В один запрос одновременно может быть добавленно нескольно действий.
+Все запросы на изменение конкретного заказа, должны делаться синхронно.
+В случае получения запроса до конца обработки предыдущего,
+будет возвращена ошибка <a class="reference external" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10">409 Conflict</a>.</p>
+<p class="last">Это ограничение касается только работы с одним заказом,
+а работать одновременно с несколькими заказами можно.</p>
+</div>
+<p>За резервирование билетов отвечают три поля:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#walkthrough-order-create-ticket"><span class="std std-ref">tickets</span></a></li>
+<li><a class="reference internal" href="#walkthrough-order-create-random"><span class="std std-ref">random</span></a></li>
+<li><a class="reference internal" href="#walkthrough-order-create-all-or-nothing"><span class="std std-ref">all_or_nothing</span></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="tickets">
+<span id="walkthrough-order-create-ticket"></span><h3>Поле <code class="docutils literal notranslate"><span class="pre">tickets</span></code><a class="headerlink" href="#tickets" title="Permalink to this headline">¶</a></h3>
+<p>В поле tickets передаются все <cite>id</cite> билетов, которые должны быть зарезервированы
+текущим заказом. Если заказ изменяется (покупатель решил добавить ещё один билет),
+то в обязательном порядке передаются все билеты,
+которые должны быть в заказе (в т.ч. те, что уже зарезервированы).
+Для удаления конкретного билета из заказа, нужно передать все билеты, кроме удаляемого.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Нельзя использовать в одном запросе с <a class="reference internal" href="#walkthrough-order-create-random"><span class="std std-ref">random</span></a>.</p>
+</div>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-orders--id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/orders/:id</code><a class="headerlink" href="#patch--v2-resources-orders--id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>tickets</strong> – список id билетов</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/orders/5b0eab671b2042000ea83850</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;5b0e8af09adc660001b0ab25&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;5b0e8afa9adc660001b0ab6c&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="random">
+<span id="walkthrough-order-create-random"></span><h3>Поле <code class="docutils literal notranslate"><span class="pre">random</span></code><a class="headerlink" href="#random" title="Permalink to this headline">¶</a></h3>
+<p>Поле random предназначено для резервирования случайных билетов из указанных категорий.
+Оно нужно для того, чтобы добавлять в заказ билеты без мест.
+Имеет вид объекта, где ключ является id категории, а значение — количество билетов.
+Так же, как и в tickets, всегда нужно передавать желаемое состояние.
+Т.е. если пользователь удалил один билет из категории,
+то передать надо random со всеми категориями и количествами, только в одной из категорий будет на один билет меньше.
+В ответе от сервера всегда будет список забронированных билетов в поле tickets.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Нельзя использовать в одном запросе с <a class="reference internal" href="#walkthrough-order-create-ticket"><span class="std std-ref">tickets</span></a>.</p>
+</div>
+<p><strong>Запрос</strong></p>
+<blockquote>
+<div><dl class="patch">
+<dt id="patch--v2-resources-orders--id">
+<code class="descname">PATCH </code><code class="descname">/v2/resources/orders/:id</code><a class="headerlink" href="#patch--v2-resources-orders--id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">JSON Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>random</strong> – массив: ключ – id категории, значение – кол-во мест</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/v2/resources/orders</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;random&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 14:41:11&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;expired_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 14:56:11&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d39bf878cd381a4891e07b7&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">54877</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;origin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;invitation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;send_tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;subscribe_agree&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;executed&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tickets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;barcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;extra&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;full&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;156.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfb306fdcc187b91179&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">157495</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OOX&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;set&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;reserved&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;extra&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;full&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;156.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sets_values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;promocode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;5d31fbfa8a75c12c9d64de13&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa8a75c12c9d64de13&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;nominal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1050.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1050.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;promocode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;viral_promocodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;vendor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;vendor_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;refs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;lifetime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;finish&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-08-28 21:50:00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-08-15 21:20:00&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;org&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Europe/Moscow&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;desc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;partners&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rasp new&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My best org&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;sets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;обычные&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;with_seats&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Хотя <code class="docutils literal notranslate"><span class="pre">tickets</span></code> и <code class="docutils literal notranslate"><span class="pre">random</span></code> нельзя использовать в одном запросе, передать все билеты можно.</p>
+<p>Алгоритм такой:</p>
+<ul class="last simple">
+<li>Запрос с <code class="docutils literal notranslate"><span class="pre">random</span></code>.</li>
+<li>Получить из ответа id билетов в поле <code class="docutils literal notranslate"><span class="pre">tickets</span></code>.</li>
+<li>Расширить список полученных id новым билетом.</li>
+<li>Отправить запрос с полем <code class="docutils literal notranslate"><span class="pre">tickets</span></code>, заполненным списком id билетов.</li>
+<li>Проверить в ответе, что всё забронировалось корректно.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="all-or-nothing">
+<span id="walkthrough-order-create-all-or-nothing"></span><h3>Поле <code class="docutils literal notranslate"><span class="pre">all_or_nothing</span></code><a class="headerlink" href="#all-or-nothing" title="Permalink to this headline">¶</a></h3>
+<p>Если значение поля <code class="docutils literal notranslate"><span class="pre">all_or_nothing</span></code> равно <code class="docutils literal notranslate"><span class="pre">true</span></code>, то резервируются либо все билеты, либо ни одного.</p>
+<p>При изменении заказа с одновременным разрезервированием и резервированием билетов,
+в случае неудачи с резервированием хотя бы одного билета, разрезервирования не происходит,
+т.е. список зарезервированных билетов не изменяется.</p>
+<p>Если значение не указано, или <code class="docutils literal notranslate"><span class="pre">false</span></code>, то билеты,
+которые не удалось забронировать пропускаются и
+отсутствуют поле <a class="reference internal" href="#walkthrough-order-create-ticket"><span class="std std-ref">tickets</span></a> в ответе.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Можно использовать, как с <code class="docutils literal notranslate"><span class="pre">tickets</span></code>, так и с <code class="docutils literal notranslate"><span class="pre">random</span></code></p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Шаг 2: Создание заказа</a><ul>
+<li><a class="reference internal" href="#walkthrough-order-create-create">Создание</a></li>
+<li><a class="reference internal" href="#walkthrough-order-create-tickets">Резервирование билетов</a><ul>
+<li><a class="reference internal" href="#tickets">Поле <code class="docutils literal notranslate"><span class="pre">tickets</span></code></a></li>
+<li><a class="reference internal" href="#random">Поле <code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li><a class="reference internal" href="#all-or-nothing">Поле <code class="docutils literal notranslate"><span class="pre">all_or_nothing</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="events.html"
+                          title="Previous page">&larr; Шаг 1: Информация о мероприятии</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="order_finish.html"
+                          title="Next page">&rarr; Шаг 3: Завершение заказа</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/walkthrough/order_create.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="order_finish.html" title="Шаг 3: Завершение заказа"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="events.html" title="Шаг 1: Информация о мероприятии"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Пошаговая интеграция для распространителей</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2025, XTIX.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

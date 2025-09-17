@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Работа со списком заказов &#8212; XTIX v2 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Работа со списком возвратов" href="refunds_list.html" />
+    <link rel="prev" title="Промокоды" href="promocodes.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="refunds_list.html" title="Работа со списком возвратов"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="promocodes.html" title="Промокоды"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Продвинутое использование</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="extra-orders-list-begin">
+<span id="id1"></span><h1>Работа со списком заказов<a class="headerlink" href="#extra-orders-list-begin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extra-orders-list-get">
+<span id="id2"></span><h2>Получение списка заказов<a class="headerlink" href="#extra-orders-list-get" title="Permalink to this headline">¶</a></h2>
+<p id="extra-orders-list-get-params"><strong>Запрос</strong></p>
+<dl class="get">
+<dt id="get--v2-resources-orders">
+<code class="descname">GET </code><code class="descname">/v2/resources/orders</code><a class="headerlink" href="#get--v2-resources-orders" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>created_at</strong> – Дата создания заказа в формате ISO от и до, через запятую</li>
+<li><strong>status</strong> – Список статусов заказа</li>
+<li><strong>events</strong> – Список мероприятий</li>
+<li><strong>only_with_customer</strong> – <code class="docutils literal notranslate"><span class="pre">bool</span></code>; Если <code class="docutils literal notranslate"><span class="pre">true</span></code> – Показываем заказы, только если есть данные покупателя</li>
+<li><strong>page</strong> – Порядковый номер страницы результатов запроса (по умолчанию – первая)</li>
+<li><strong>page_size</strong> – Кол-во записей на страницу результатов запроса (минимум 1, максимум 200, по умолчанию 50)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p>Список <a class="reference internal" href="../walkthrough/order_create.html#walkthrough-order-create-object"><span class="std std-ref">объектов заказа</span></a></p>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/v2/resources/orders?status=done,cancelled&amp;created_at=2000-07-28T13:00:00,2020-07-28T13:00:00</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример ответа</strong></p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="nx">OK</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span><span class="w"> </span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;code&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;97elgi8j&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 14:56:16&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;done_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 14:57:47&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;event&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d31fbdd27649b0dff076117&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;expired_after&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-07-25 15:11:16&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d39c3108cd381a4891e07e0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">54881</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;origin&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">            </span><span class="s2">&quot;settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;invitation&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;send_tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;subscribe_agree&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;done&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;tickets&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;barcode&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;17174251182011730&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;extra&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;6.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;full&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;156.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfb306fdcc187b91179&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;number&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">157495</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;serial&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;OOX&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;set&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;reserved&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="s2">&quot;values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;extra&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;6.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;full&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;156.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;sets_values&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa27649b0dff07611b&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;150.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;promocode&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="s2">&quot;5d31fbfa8a75c12c9d64de13&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="s2">&quot;discount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5d31fbfa8a75c12c9d64de13&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;nominal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1050.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;price&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1050.00&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;promocode&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;viral_promocodes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;vendor&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;vendor_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">&quot;pagination&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;page&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;page_size&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">50</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;total&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;refs&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;events&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;5c13b5b1867efb000be1ebd7&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5c13b5b1867efb000be1ebd7&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;lifetime&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;finish&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-08-31 16:00:00&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;start&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2019-08-31 15:00:00&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="s2">&quot;org&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5ba10ea90c43fc000b0fc786&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;status&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;timezone&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Europe/Moscow&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s2">&quot;desc&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ауц&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;text&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;KoЯn&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">...</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;partners&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b02d6e9517565000d9cb1ce&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Rasp new&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5b04229196c055000d87c2b5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;My best org&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;5ba10ea90c43fc000b0fc786&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5ba10ea90c43fc000b0fc786&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Тест VK Pay&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;5bb333389049ea000d2ba9c7&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5bb333389049ea000d2ba9c7&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Newbie&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="extra-orders-list-send-to-email">
+<span id="id3"></span><h2>Экспорт списка заказов на почту<a class="headerlink" href="#extra-orders-list-send-to-email" title="Permalink to this headline">¶</a></h2>
+<p><strong>Описание параметров:</strong></p>
+<p><strong>Запрос</strong></p>
+<dl class="post">
+<dt id="post--v2-resources-orders-export">
+<code class="descname">POST </code><code class="descname">/v2/resources/orders/export</code><a class="headerlink" href="#post--v2-resources-orders-export" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>created_at</strong> – Дата создания заказа в формате ISO от и до, через запятую</li>
+<li><strong>status</strong> – Список статусов заказа</li>
+<li><strong>events</strong> – Список мероприятий</li>
+<li><strong>only_with_customer</strong> – <code class="docutils literal notranslate"><span class="pre">bool</span></code>; Если <code class="docutils literal notranslate"><span class="pre">true</span></code> – Показываем заказы, только если есть данные покупателя</li>
+<li><strong>email</strong> – Адрес, куда отправить файл экспорта. Обязательно</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Ответ</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">0</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html; charset=UTF-8</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Пример запроса</strong></p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/v2/resources/orders/export</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">key 9bd8359943b545500278875r49c5b96d</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000-07-28T13:00:00,2020-07-28T13:00:00&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hello@world.hello&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;done&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;cancelled&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Работа со списком заказов</a><ul>
+<li><a class="reference internal" href="#extra-orders-list-get">Получение списка заказов</a></li>
+<li><a class="reference internal" href="#extra-orders-list-send-to-email">Экспорт списка заказов на почту</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="promocodes.html"
+                          title="Previous page">&larr; Промокоды</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="refunds_list.html"
+                          title="Next page">&rarr; Работа со списком возвратов</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/extra/orders_list.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="XTIX HTTP API"
+             >API Reference</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="refunds_list.html" title="Работа со списком возвратов"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="promocodes.html" title="Промокоды"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">XTIX v2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Продвинутое использование</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2025, XTIX.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.6.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

@@ -1,0 +1,33 @@
+body {
+    background: #101214;
+}
+
+div.body h2 {
+    background-color: #7C3DC2;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+div.body h2.highlighted {
+    background-color: #7C3DC2;
+}
+
+div.body p.rubric, .section.emphasize-children > .section > h3, .desc-section-1 > .section-header, #table-of-contents > h1, h1#search-documentation {
+    background-color: #7C3DC2;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.highlighted {
+    background-color: #7C3DC2;
+}
+
+div.related {
+    background: #7C3DC2;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+div.related a {
+    color: #ffffff;
+}
