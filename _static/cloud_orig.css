@@ -876,9 +876,9 @@ div.body p.rubric,
     div.body h2.highlighted,
     .section.emphasize-children > .section > h3.highlighted
     {
-        background-color: #fbe54e;
-        border-color: #F8D186;
-        color: #333;
+        background-color: #984ef3;
+        border-color: #984ef3;
+        color: #ffffff;
     }
 
 
@@ -946,9 +946,9 @@ h1#search-documentation
 
 div.body a.headerlink:hover
 {
-    background-color: #fff9e4;
-    border-color: #F8D186;
-    color: #d39110;
+    background-color: #deccff;
+    border-color: #984ef3;
+    color: #984ef3;
     text-decoration: none;
 
 }
@@ -976,10 +976,10 @@ a.headerlink:hover:active
 .html-toggle-button:hover:after,
 .section.emphasize-children > .section > h3.html-toggle-button:hover:after
 {
-    background: #fff9e4;
+    background: #deccff;
 
 
-    border-color: #F8D186;
+    border-color: #984ef3;
 
 
       -moz-border-radius: 4px;
@@ -1001,7 +1001,7 @@ a.headerlink:hover:active
 
 
 
-    color: #d39110;
+    color: #984ef3;
 }
 
 
@@ -1109,7 +1109,7 @@ a:visited
 
 a:hover
 {
-  color: #d39110;
+  color: #984ef3;
   background: #fff9e4;
   text-decoration: underline;
 }
@@ -1164,7 +1164,7 @@ dt:target,
 {
     padding: 4px;
     margin: -4px;
-    background-color: #fbe54e;
+    background-color: #984ef3;
 
 
       -moz-border-radius: 10px;
@@ -1292,7 +1292,7 @@ div.admonition, p.deprecated
 
 
 
-div.caution, div.important { background-color: #FFF7E0; background-image: url("icon-caution.png"); }
+div.caution, div.important { background-color: #deccff; background-image: url("icon-caution.png"); }
 div.warning { background-color: #ffe4e4; background-image: url("icon-warning.png"); }
 div.danger, div.admonition.error { background-color: #ffe4e4; background-image: url("icon-danger.png"); }
 
