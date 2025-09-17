@@ -324,9 +324,9 @@ div.sphinxsidebar a
 
 div.sphinxsidebar a:hover
 {
-    color: #d39110;
-    background: #fff9e4;
-    border-color: #F8D186;
+    color: #984ef3;
+    background: #deccff;
+    border-color: #984ef3;
     text-decoration: none;
 }
 
@@ -410,16 +410,16 @@ div.sphinxsidebar ul a:hover,
 div.sphinxprev a:hover,
 div.sphinxnext a:hover
 {
-  background: #fff9e4;
-  border-color: #F8D186;
-  color: #d39110;
+  background: #deccff;
+  border-color: #984ef3;
+  color: #984ef3;
   text-decoration: none;
 }
 
 
 div.sphinxsidebar li.current > a.local
 {
-  color: #d39110;
+  color: #984ef3;
 }
 
 
@@ -428,14 +428,14 @@ div.sphinxsidebar ul ul li.active:not(.current) > a:before
   position: absolute;
   left: -0.8em;
   content: "↳";
-  color: #F8D186;
+  color: #984ef3;
 }
 
 
 div.sphinxsidebar li.active.final > a:not(.child):not(:hover)
 {
-  background: #fff9e4;
-  color: #d39110;
+  background: #deccff;
+  color: #984ef3;
 }
 
 
@@ -507,15 +507,15 @@ h1#search-documentation ~ form > input[type="submit"]:hover,
 div.sidebartoggle button:hover,
 .highlight .copybutton:hover
 {
-   background: #fff9e4;
-   color: #d39110;
-   border-color: #F8D186;
+   background: #deccff;
+   color: #984ef3;
+   border-color: #984ef3;
 }
 
 h1#search-documentation ~ form > input[type="text"]:focus,
 div.sphinxsidebar input[type="text"]:focus
 {
-  border-color: #F8D186;
+  border-color: #984ef3;
 }
 
 .highlight .copybutton:hover:not(:active),
