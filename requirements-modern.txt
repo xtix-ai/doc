@@ -1,0 +1,12 @@
+# Современные версии для GitHub Pages
+sphinx>=4.0,<6.0
+sphinxcontrib-httpdomain>=1.8.0
+cloud_sptheme>=1.10.1
+
+# Дополнительные пакеты для стабильности
+sphinx-rtd-theme>=1.0.0
+jinja2>=3.0.0
+docutils>=0.17.0
+
+# Для разработки
+sphinx-autobuild
